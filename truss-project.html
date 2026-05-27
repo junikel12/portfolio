@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Howe Truss | Jordan Unikel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#050507; --card:#0d0d12; --text:#f0f0f5;
+      --sub:#8888a0; --accent:#a8c5ff; --accent2:#ffd6a8; --line:rgba(255,255,255,.06);
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    .bg-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:0; filter:blur(80px); opacity:.4; }
+    .bg-orb-1 { width:600px;height:600px;background:radial-gradient(circle,#ff8a0015,transparent 70%);top:-100px;right:-150px; }
+
+    nav {
+      position:fixed; top:0; width:100%; z-index:1000;
+      backdrop-filter:blur(24px); background:rgba(5,5,7,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-container {
+      width:90%; max-width:1400px; margin:auto;
+      height:68px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo { font-family:'DM Serif Display',serif; font-size:1.15rem; text-decoration:none; color:var(--text); }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { color:var(--sub); text-decoration:none; transition:color .25s; font-size:.9rem; font-weight:500; }
+    .nav-links a:hover { color:var(--text); }
+
+    .container { width:90%; max-width:1200px; margin:auto; }
+
+    .project-hero { padding:14rem 0 6rem; position:relative; z-index:1; }
+    .back-link { display:inline-flex; align-items:center; gap:.5rem; color:var(--sub); text-decoration:none; font-size:.9rem; margin-bottom:3rem; transition:color .2s; }
+    .back-link:hover { color:var(--text); }
+    .project-label { color:var(--accent); text-transform:uppercase; letter-spacing:3px; font-size:.75rem; font-weight:500; margin-bottom:1.2rem; }
+    .project-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(3.5rem,8vw,7rem); line-height:.9; letter-spacing:-2px; margin-bottom:2.5rem; }
+    .project-hero p { color:var(--sub); font-size:1.1rem; line-height:1.9; max-width:760px; margin-bottom:2rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
+    .tag { padding:.55rem .95rem; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); color:var(--sub); font-size:.82rem; }
+
+    .hero-image { width:100%; height:70vh; border-radius:32px; overflow:hidden; background:var(--card); margin:4rem 0; position:relative; z-index:1; }
+    .hero-image img { width:100%; height:100%; object-fit:cover; }
+
+    .content-section { padding:5rem 0; position:relative; z-index:1; }
+    .content-section + .content-section { border-top:1px solid var(--line); }
+    .section-heading { font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,3vw,2.8rem); letter-spacing:-.5px; margin-bottom:1.5rem; }
+    .body-text { color:var(--sub); line-height:1.95; font-size:1.05rem; }
+    .body-text + .body-text { margin-top:1.2rem; }
+
+    /* STAT CALLOUT */
+    .stat-bar {
+      display:flex; gap:2rem; flex-wrap:wrap; margin:2.5rem 0;
+      padding:2rem; background:var(--card);
+      border:1px solid var(--line); border-radius:20px;
+    }
+    .stat { flex:1; min-width:140px; }
+    .stat-num { font-family:'DM Serif Display',serif; font-size:3rem; color:var(--accent2); }
+    .stat-label { color:var(--sub); font-size:.85rem; margin-top:.3rem; letter-spacing:.5px; }
+
+    /* BEFORE / AFTER */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:2.5rem; }
+    .img-card { border-radius:20px; overflow:hidden; background:var(--card); border:1px solid var(--line); }
+    .img-card img { width:100%; height:340px; object-fit:cover; display:block; }
+    .img-caption { padding:1rem 1.3rem; color:var(--sub); font-size:.88rem; line-height:1.6; }
+    .img-caption strong { color:var(--text); }
+
+    /* GRAPH */
+    .graph-wrap { margin-top:2.5rem; border-radius:20px; overflow:hidden; background:var(--card); border:1px solid var(--line); }
+    .graph-wrap img { width:100%; display:block; }
+    .graph-caption { padding:1.2rem 1.5rem; color:var(--sub); font-size:.9rem; line-height:1.7; }
+
+    /* REPORT LINK */
+    .report-block {
+      margin-top:3rem; padding:2rem 2.5rem;
+      background:var(--card); border:1px solid var(--line);
+      border-radius:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
+    }
+    .report-text .label { color:var(--accent); font-size:.75rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:.4rem; }
+    .report-text .title { font-family:'DM Serif Display',serif; font-size:1.4rem; }
+    .btn { padding:.9rem 1.8rem; border-radius:999px; text-decoration:none; transition:all .25s; font-weight:500; font-size:.95rem; border:1px solid rgba(255,255,255,.08); display:inline-block; }
+    .btn-primary { background:var(--text); color:#050507; border-color:var(--text); }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(168,197,255,.15); }
+
+    footer { padding:2rem; text-align:center; color:#444; font-size:.85rem; border-top:1px solid var(--line); position:relative; z-index:1; }
+
+    @media(max-width:768px) {
+      .two-col { grid-template-columns:1fr; }
+      .hero-image { height:50vh; }
+      .report-block { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jordan Unikel</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-hero">
+    <div class="container">
+      <a href="index.html#projects" class="back-link">← Back to Projects</a>
+      <div class="project-label">Project 03</div>
+      <h1>Howe Truss<br>Optimization</h1>
+      <p>
+        Designed a Howe truss to maximize weight-to-force ratio. Engineered custom laser-cut
+        gusset plates using geometric calculations, and helped calculate member forces in tension
+        and compression. The structure held 515 lbs before failure.
+      </p>
+      <div class="tags">
+        <div class="tag">SolidWorks</div>
+        <div class="tag">Structural Analysis</div>
+        <div class="tag">Force Calculations</div>
+        <div class="tag">FEA</div>
+        <div class="tag">Laser Cutting</div>
+        <div class="tag">Fabrication</div>
+        <div class="tag">Truss Member Math</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-image">
+      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe truss pre-testing — all gusset plates and members assembled">
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Project Overview</h2>
+      <p class="body-text">
+        The goal of this project was to design a truss with the best weight-to-force ratio possible.
+        My team researched various truss configurations and analyzed how they reacted to a point force
+        applied at the center before selecting a Howe truss design.
+      </p>
+      <p class="body-text">
+        I custom made all of the gusset plates in SolidWorks using intricate geometric calculations to
+        ensure they occupied the full 15% of each member allotted for bonding area. I then laser cut
+        the plates for integration into the truss, and assisted in calculating the force each member
+        experienced and whether members were in tension or compression.
+      </p>
+
+      <div class="stat-bar">
+        <div class="stat">
+          <div class="stat-num">515</div>
+          <div class="stat-label">lbs at failure</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">15%</div>
+          <div class="stat-label">member area — gusset coverage</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Howe</div>
+          <div class="stat-label">truss configuration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEST RESULTS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Testing & Failure Analysis</h2>
+      <p class="body-text">
+        The truss was loaded with a central point force and monitored to failure. It failed at 515 lbs
+        due to gusset plate shear — first at the bottom joint (highest stress concentration from
+        multiple members converging), then at the top.
+      </p>
+
+      <div class="two-col">
+        <div class="img-card">
+          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/upper%20gusset%20shear.jpg" alt="Top gusset plate shear failure">
+          <div class="img-caption">
+            <strong>Top gusset plate shear.</strong> A construction gap between members reduced effective bonding area below the design target, creating a direct path to failure under load.
+          </div>
+        </div>
+        <div class="img-card">
+          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/lower%20gusset%20shear.jpg" alt="Bottom gusset plate shear failure">
+          <div class="img-caption">
+            <strong>Bottom gusset plate shear.</strong> The bottom joint concentrated forces from multiple tension and compression members simultaneously — making it the first to fail under natural stress.
+          </div>
+        </div>
+      </div>
+
+      <div class="graph-wrap" style="margin-top:2rem;">
+        <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Load vs. displacement graph — truss failure at 515 lbs">
+        <div class="graph-caption">
+          Force (lbf) vs. displacement (in) recorded by the testing press. The truss reached a maximum load of 515 lbs before gusset plate shear initiated catastrophic failure.
+        </div>
+      </div>
+
+      <div class="report-block">
+        <div class="report-text">
+          <div class="label">Full Documentation</div>
+          <div class="title">ENES 102 Truss Report</div>
+        </div>
+        <a href="https://docs.google.com/document/d/1PRMLhgP9FrMCK98eLBqiTLESlMnlpifaALMHoimCD1k/edit?usp=sharing"
+           target="_blank" class="btn btn-primary">See the Full Report →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2026 Jordan Unikel</footer>
+</body>
+</html>

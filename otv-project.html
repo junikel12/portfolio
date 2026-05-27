@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTV Project | Jordan Unikel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#050507; --card:#0d0d12; --text:#f0f0f5;
+      --sub:#8888a0; --accent:#a8c5ff; --accent2:#ffd6a8; --line:rgba(255,255,255,.06);
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    .bg-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:0; filter:blur(80px); opacity:.4; }
+    .bg-orb-1 { width:600px;height:600px;background:radial-gradient(circle,#1a2fff22,transparent 70%);top:-200px;right:-100px; }
+
+    nav {
+      position:fixed; top:0; width:100%; z-index:1000;
+      backdrop-filter:blur(24px); background:rgba(5,5,7,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-container {
+      width:90%; max-width:1400px; margin:auto;
+      height:68px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo { font-family:'DM Serif Display',serif; font-size:1.15rem; text-decoration:none; color:var(--text); }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { color:var(--sub); text-decoration:none; transition:color .25s; font-size:.9rem; font-weight:500; }
+    .nav-links a:hover { color:var(--text); }
+
+    .container { width:90%; max-width:1200px; margin:auto; }
+
+    /* HERO */
+    .project-hero {
+      padding: 14rem 0 6rem;
+      position:relative; z-index:1;
+    }
+    .back-link {
+      display:inline-flex; align-items:center; gap:.5rem;
+      color:var(--sub); text-decoration:none; font-size:.9rem;
+      margin-bottom:3rem; transition:color .2s;
+    }
+    .back-link:hover { color:var(--text); }
+    .project-label { color:var(--accent); text-transform:uppercase; letter-spacing:3px; font-size:.75rem; font-weight:500; margin-bottom:1.2rem; }
+    .project-hero h1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(3.5rem,8vw,7rem);
+      line-height:.9; letter-spacing:-2px; margin-bottom:2.5rem;
+    }
+    .project-hero p {
+      color:var(--sub); font-size:1.1rem; line-height:1.9;
+      max-width:760px; margin-bottom:2rem;
+    }
+    .tags { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
+    .tag {
+      padding:.55rem .95rem; border-radius:999px;
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+      color:var(--sub); font-size:.82rem;
+    }
+
+    /* HERO IMAGE */
+    .hero-image {
+      width:100%; height:75vh; border-radius:32px; overflow:hidden;
+      background:var(--card); margin:4rem 0;
+      position:relative; z-index:1;
+    }
+    .hero-image img { width:100%; height:100%; object-fit:cover; }
+
+    /* CONTENT */
+    .content-section { padding:5rem 0; position:relative; z-index:1; }
+    .content-section + .content-section { border-top:1px solid var(--line); }
+
+    .section-heading {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(1.8rem,3vw,2.8rem);
+      letter-spacing:-.5px; margin-bottom:1.5rem;
+    }
+    .body-text { color:var(--sub); line-height:1.95; font-size:1.05rem; }
+    .body-text + .body-text { margin-top:1.2rem; }
+
+    /* COMPONENT GRID */
+    .component-grid {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr));
+      gap:2rem; margin-top:3rem;
+    }
+    .component-card {
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:20px; overflow:hidden;
+      transition:border-color .3s;
+    }
+    .component-card:hover { border-color:rgba(168,197,255,.2); }
+    .component-img {
+      width:100%; height:260px; overflow:hidden;
+    }
+    .component-img img { width:100%; height:100%; object-fit:cover; transition:transform 1s ease; }
+    .component-card:hover .component-img img { transform:scale(1.05); }
+    .component-info { padding:1.4rem 1.6rem; }
+    .component-name {
+      font-family:'DM Serif Display',serif;
+      font-size:1.2rem; margin-bottom:.5rem;
+    }
+    .component-desc { color:var(--sub); font-size:.9rem; line-height:1.7; }
+
+    /* TWO COL */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:3rem; }
+    .full-img { width:100%; border-radius:20px; overflow:hidden; }
+    .full-img img { width:100%; height:100%; object-fit:cover; border-radius:20px; }
+    .full-img.tall { height:420px; }
+    .full-img.medium { height:340px; }
+
+    footer {
+      padding:2rem; text-align:center; color:#444; font-size:.85rem;
+      border-top:1px solid var(--line); position:relative; z-index:1;
+    }
+
+    @media(max-width:768px) {
+      .two-col { grid-template-columns:1fr; }
+      .component-grid { grid-template-columns:1fr; }
+      .hero-image { height:50vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jordan Unikel</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-hero">
+    <div class="container">
+      <a href="index.html#projects" class="back-link">← Back to Projects</a>
+      <div class="project-label">Project 01</div>
+      <h1>Autonomous Over<br>Terrain Vehicle</h1>
+      <p>
+        A fully autonomous vehicle designed to navigate an obstacle course and complete tasks
+        at a mission site. I owned the drivetrain and bracket design systems from motor selection
+        through fabrication.
+      </p>
+      <div class="tags">
+        <div class="tag">Mechanical Design</div>
+        <div class="tag">Drivetrain Analysis</div>
+        <div class="tag">SolidWorks</div>
+        <div class="tag">Fusion 360</div>
+        <div class="tag">Onshape</div>
+        <div class="tag">3D Printing</div>
+        <div class="tag">Systems Engineering</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-image">
+      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/image%20of%20full%20OTV.jpg" alt="Full OTV including propulsion, circuitry, chassis, actuators, and sensors">
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Project Overview</h2>
+      <p class="body-text">
+        The goal of this project was to design a fully autonomous Over Terrain Vehicle (OTV) capable of
+        completing tasks at a mission site while navigating through an obstacle course. I was responsible
+        for the drivetrain and bracket design systems of the OTV.
+      </p>
+      <p class="body-text">
+        To select motors and wheels, I completed drivetrain calculations focused on torque, speed, and
+        budget constraints. I also utilized SolidWorks, Fusion360, and Onshape to design and 3D print
+        custom brackets for motors, wheel axles, sensors, and movement arms integrated throughout the vehicle.
+      </p>
+    </div>
+  </div>
+
+  <!-- PROPULSION -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Propulsion System</h2>
+      <p class="body-text">
+        The propulsion system consists of the drive motor, wheel, and inner and outer wheel caps.
+        Motor selection was driven by torque and speed calculations to meet terrain and mission requirements.
+      </p>
+      <div class="two-col" style="margin-top:2.5rem;">
+        <div class="full-img tall">
+          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Image%20of%20propulsion%20system.jpg" alt="Propulsion system — motor, wheel, and caps">
+        </div>
+        <div class="full-img tall">
+          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/inner%20stabilizer%20otv.jpg" alt="Inner wheel stabilizer — D-shaft adapter">
+        </div>
+      </div>
+      <p class="body-text" style="margin-top:1.5rem;">
+        The inner wheel stabilizer was designed to connect the wheel interface with the motor axle by
+        transforming a circular aperture into a D-shaft profile — allowing the wheel to transmit torque
+        without slipping.
+      </p>
+    </div>
+  </div>
+
+  <!-- CUSTOM BRACKETS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Custom Bracket Design</h2>
+      <p class="body-text">
+        Each bracket was designed from scratch in SolidWorks, toleranced to specific component
+        specs, and 3D printed for rapid iteration and deployment.
+      </p>
+
+      <div class="component-grid">
+
+        <div class="component-card">
+          <div class="component-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/bracket%20for%20motor.png" alt="Motor bracket CAD">
+          </div>
+          <div class="component-info">
+            <div class="component-name">Motor Bracket</div>
+            <p class="component-desc">
+              Holds the drive motor firmly against the main chassis. Toleranced to the motor's exact specs
+              so the motor is squeezed into position — preventing drift and limiting variance in path
+              straightness and turn distance (in rad).
+            </p>
+          </div>
+        </div>
+
+        <div class="component-card">
+          <div class="component-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/bracket%20linear%20actuator.png" alt="Linear actuator bracket CAD">
+          </div>
+          <div class="component-info">
+            <div class="component-name">Linear Actuator Bracket</div>
+            <p class="component-desc">
+              Designed to hold a linear actuator rigidly against the chassis to prevent movement
+              during operation, ensuring precise and repeatable actuation.
+            </p>
+          </div>
+        </div>
+
+        <div class="component-card">
+          <div class="component-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/color%20sensor%20bracket.jpg" alt="Color sensor bracket — printed in red">
+          </div>
+          <div class="component-info">
+            <div class="component-name">Color Sensor Bracket</div>
+            <p class="component-desc">
+              Mounts the color sensor underneath the main chassis. Features a snap-fit design that lets the
+              sensor click into place and stay secure throughout all movement phases.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2026 Jordan Unikel</footer>
+</body>
+</html>

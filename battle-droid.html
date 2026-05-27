@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle Droid Assembly | Jordan Unikel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#050507; --card:#0d0d12; --text:#f0f0f5;
+      --sub:#8888a0; --accent:#a8c5ff; --line:rgba(255,255,255,.06);
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    .bg-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:0; filter:blur(80px); opacity:.4; }
+    .bg-orb-1 { width:600px;height:600px;background:radial-gradient(circle,#2a1fff22,transparent 70%);top:-200px;left:-100px; }
+
+    nav {
+      position:fixed; top:0; width:100%; z-index:1000;
+      backdrop-filter:blur(24px); background:rgba(5,5,7,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-container {
+      width:90%; max-width:1400px; margin:auto;
+      height:68px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo { font-family:'DM Serif Display',serif; font-size:1.15rem; text-decoration:none; color:var(--text); }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { color:var(--sub); text-decoration:none; transition:color .25s; font-size:.9rem; font-weight:500; }
+    .nav-links a:hover { color:var(--text); }
+
+    .container { width:90%; max-width:1200px; margin:auto; }
+
+    .project-hero { padding:14rem 0 6rem; position:relative; z-index:1; }
+    .back-link {
+      display:inline-flex; align-items:center; gap:.5rem;
+      color:var(--sub); text-decoration:none; font-size:.9rem;
+      margin-bottom:3rem; transition:color .2s;
+    }
+    .back-link:hover { color:var(--text); }
+    .project-label { color:var(--accent); text-transform:uppercase; letter-spacing:3px; font-size:.75rem; font-weight:500; margin-bottom:1.2rem; }
+    .project-hero h1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(3.5rem,8vw,7rem);
+      line-height:.9; letter-spacing:-2px; margin-bottom:2.5rem;
+    }
+    .project-hero p { color:var(--sub); font-size:1.1rem; line-height:1.9; max-width:760px; margin-bottom:2rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
+    .tag { padding:.55rem .95rem; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); color:var(--sub); font-size:.82rem; }
+
+    .hero-image { width:100%; height:75vh; border-radius:32px; overflow:hidden; background:var(--card); margin:4rem 0; position:relative; z-index:1; }
+    .hero-image img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+
+    .content-section { padding:5rem 0; position:relative; z-index:1; }
+    .content-section + .content-section { border-top:1px solid var(--line); }
+    .section-heading { font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,3vw,2.8rem); letter-spacing:-.5px; margin-bottom:1.5rem; }
+    .body-text { color:var(--sub); line-height:1.95; font-size:1.05rem; }
+    .body-text + .body-text { margin-top:1.2rem; }
+
+    /* ASSEMBLY SHOWCASE — tall hero-style pair */
+    .assembly-pair {
+      display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:3rem;
+    }
+    .assembly-img { border-radius:20px; overflow:hidden; height:500px; background:var(--card); }
+    .assembly-img img { width:100%; height:100%; object-fit:cover; transition:transform 1s ease; }
+    .assembly-img:hover img { transform:scale(1.04); }
+
+    /* PARTS GRID */
+    .parts-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:1.2rem; margin-top:3rem;
+    }
+    .part-card {
+      background:var(--card); border:1px solid var(--line);
+      border-radius:16px; overflow:hidden; transition:border-color .3s;
+    }
+    .part-card:hover { border-color:rgba(168,197,255,.2); }
+    .part-img { width:100%; height:220px; overflow:hidden; background:#111; }
+    .part-img img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform 1s ease; }
+    .part-card:hover .part-img img { transform:scale(1.06); }
+    .part-info { padding:1.1rem 1.3rem; }
+    .part-name { font-weight:500; font-size:.95rem; margin-bottom:.3rem; }
+    .part-desc { color:var(--sub); font-size:.85rem; line-height:1.6; }
+
+    footer { padding:2rem; text-align:center; color:#444; font-size:.85rem; border-top:1px solid var(--line); position:relative; z-index:1; }
+
+    @media(max-width:768px) {
+      .assembly-pair { grid-template-columns:1fr; }
+      .parts-grid { grid-template-columns:1fr 1fr; }
+      .hero-image { height:50vh; }
+    }
+    @media(max-width:500px) {
+      .parts-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jordan Unikel</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-hero">
+    <div class="container">
+      <a href="index.html#projects" class="back-link">← Back to Projects</a>
+      <div class="project-label">Project 02</div>
+      <h1>Full Battle Droid<br>Assembly</h1>
+      <p>
+        A complete, fully articulated B-1 Battle Droid modeled entirely in SolidWorks —
+        from spline-sculpted head to toleranced joint mates. 15+ modeling features, zero shortcuts.
+      </p>
+      <div class="tags">
+        <div class="tag">SolidWorks</div>
+        <div class="tag">Custom Geometry</div>
+        <div class="tag">Assembly Modeling</div>
+        <div class="tag">Mechanical Mates</div>
+        <div class="tag">Spline Modeling</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-image">
+      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20standing.png" alt="Full B-1 Battle Droid standing — SolidWorks assembly">
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Project Overview</h2>
+      <p class="body-text">
+        Developed a fully detailed Battle Droid Assembly in SolidWorks using reference images and
+        mechanical assembly design. I created custom modeled geometry and joint systems using spline
+        tools, advanced extrusions, and dimension refinement to replicate and customize the original
+        B-1 Battle Droid design.
+      </p>
+      <p class="body-text">
+        By utilizing trial and error I turned reference imagery into a realized physical model that
+        emphasizes realism (especially the head), assembly integration, and detailed component interaction.
+        The head alone uses over 15 distinct SolidWorks modeling features.
+      </p>
+    </div>
+  </div>
+
+  <!-- ASSEMBLY VIEWS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Assembly Views</h2>
+      <p class="body-text">Standing and mid-stride poses demonstrate the mechanical mates and joint articulation throughout the full assembly.</p>
+      <div class="assembly-pair">
+        <div class="assembly-img">
+          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20standing.png" alt="Battle droid standing pose">
+        </div>
+        <div class="assembly-img">
+          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20moving.png" alt="Battle droid mid-stride">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENT PARTS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Individual Components</h2>
+      <p class="body-text">Each part was modeled independently before being mated into the final assembly. Here are the key components.</p>
+      <div class="parts-grid">
+
+        <div class="part-card">
+          <div class="part-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20head.png" alt="Battle droid head">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Head</div>
+            <p class="part-desc">Almost geometrically exact to the actual B-1 design. Uses over 15 SolidWorks modeling features.</p>
+          </div>
+        </div>
+
+        <div class="part-card">
+          <div class="part-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20head%20torso%201.png" alt="Upper torso">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Upper Torso</div>
+            <p class="part-desc">Primary structural body piece — connects the head, arms, and lower torso.</p>
+          </div>
+        </div>
+
+        <div class="part-card">
+          <div class="part-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20torso%202.png" alt="Lower torso">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Lower Torso</div>
+            <p class="part-desc">Hip connection component linking the upper body to the leg assemblies with pivot mate.</p>
+          </div>
+        </div>
+
+        <div class="part-card">
+          <div class="part-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20upper%20arm.png" alt="Upper arm">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Upper Arm</div>
+            <p class="part-desc">Shoulder-to-elbow segment with ball joint geometry for rotational articulation.</p>
+          </div>
+        </div>
+
+        <div class="part-card">
+          <div class="part-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20lower%20arm.png" alt="Lower arm">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Lower Arm</div>
+            <p class="part-desc">Elbow-to-hand segment — includes fine detail at the claw-tip for accuracy.</p>
+          </div>
+        </div>
+
+        <div class="part-card">
+          <div class="part-img">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20upper%20leg.png" alt="Upper leg">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Upper Leg</div>
+            <p class="part-desc">Hip-to-knee linkage designed for articulated standing and walking poses.</p>
+          </div>
+        </div>
+
+        <div class="part-card" style="grid-column:1/3;">
+          <div class="part-img" style="height:280px;">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20lower%20leg.png" alt="Lower leg">
+          </div>
+          <div class="part-info">
+            <div class="part-name">Lower Leg & Foot</div>
+            <p class="part-desc">Knee-to-foot segment with the characteristic swept-back ankle geometry of the B-1 design.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2026 Jordan Unikel</footer>
+</body>
+</html>
