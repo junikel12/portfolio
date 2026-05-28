@@ -72,16 +72,35 @@
     .projects { padding:4rem 0 12rem; }
     .project { margin-bottom:14rem; }
 
-    /* --- WIDE LAYOUT (landscape hero image) --- */
+    /* ── WIDE LAYOUT — landscape hero banner ── */
     .project-image {
-      width:100%;height:78vh;
-      border-radius:32px;overflow:hidden;
-      background:var(--card);margin-bottom:2.5rem;
+      width:100%; height:78vh;
+      border-radius:32px; overflow:hidden;
+      background:var(--card); margin-bottom:2.5rem;
       position:relative;
     }
     .project-image::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,7,.4) 0%,transparent 50%); }
-    .project-image img { width:100%;height:100%;object-fit:cover;transition:transform 1.8s ease; }
-    .project:hover .project-image img { transform:scale(1.04); }
+    /* Normal (non-rotated) images get the zoom hover on the img itself */
+    .project-image img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform 1.8s ease;
+    }
+    .project-image:hover img { transform:scale(1.04); }
+
+    /* Rotated images need their own wrapper so hover doesn't fight the rotation */
+    .rotate-wrap {
+      width:100%; height:100%;
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .rotate-wrap img {
+      /* rotate then scale up enough to fill the container without black bars */
+      transform: rotate(-90deg) scaleX(1.78) scaleY(1.0);
+      width:100%; height:100%;
+      object-fit:cover;
+      flex-shrink:0;
+      transition: none; /* no hover transform — keeps rotation stable */
+    }
 
     .project-content { display:grid;grid-template-columns:1fr 1fr;gap:5rem; }
     .project-title { font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5vw,5rem);line-height:.92;letter-spacing:-1px; }
@@ -89,14 +108,32 @@
     .project-tags { display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem; }
     .tag { padding:.55rem .95rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--sub);font-size:.82rem; }
 
-    /* --- MINI GALLERY (landscape images, 2 wide) --- */
+    /* ── MINI GALLERIES — all get border-radius:20px ── */
+
+    /* Standard 2-col landscape mini gallery */
     .mini-gallery { margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem; }
     .mini-image { height:320px;overflow:hidden;border-radius:20px;background:var(--card); }
     .mini-image img { width:100%;height:100%;object-fit:cover;transition:transform 1s ease; }
     .mini-image:hover img { transform:scale(1.06); }
 
-    /* --- PORTRAIT LAYOUT (tall/vertical hero) --- */
-    /* Used for Battle Droid — image sits beside the text, not above */
+    /* OTV 2-col — images show full height naturally */
+    .mini-gallery-otv { margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem; }
+    .mini-image-otv { overflow:hidden;border-radius:20px;background:var(--card); }
+    .mini-image-otv img { width:100%;display:block;object-fit:contain;max-height:420px;transition:transform 1s ease; }
+    .mini-image-otv:hover img { transform:scale(1.05); }
+
+    /* Battle Droid 3-col — tall cells, contain so full droid shows */
+    .mini-gallery-3 { margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem; }
+    .mini-image-sq {
+      height:480px; /* taller so vertical renders have room */
+      overflow:hidden;
+      border-radius:20px; /* rounded corners to match main images */
+      background:var(--card);
+    }
+    .mini-image-sq img { width:100%;height:100%;object-fit:contain;background:var(--card);transition:transform 1s ease; }
+    .mini-image-sq:hover img { transform:scale(1.06); }
+
+    /* ── PORTRAIT LAYOUT — Battle Droid main image beside text ── */
     .project-portrait {
       display:grid;
       grid-template-columns:420px 1fr;
@@ -105,47 +142,15 @@
       margin-bottom:4rem;
     }
     .project-portrait-image {
-      border-radius:28px;overflow:hidden;
+      border-radius:28px; overflow:hidden;
       background:var(--card);
-      position:relative;
-      /* no fixed height — let the image define it */
     }
     .project-portrait-image img {
-      width:100%;display:block;
+      width:100%; display:block;
       object-fit:contain;
       transition:transform 1.8s ease;
     }
-    .project-portrait:hover .project-portrait-image img { transform:scale(1.03); }
-
-    /* Mini gallery variant for portrait projects — 3 smaller squares */
-    .mini-gallery-3 {
-      margin-top:3rem;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1.2rem;
-    }
-    .mini-image-sq { height:260px;overflow:hidden;border-radius:20px;background:var(--card); }
-    .mini-image-sq img { width:100%;height:100%;object-fit:contain;background:var(--card);transition:transform 1s ease; }
-    .mini-image-sq:hover img { transform:scale(1.06); }
-
-    /* --- OTV mini gallery — propulsion is tall, bracket is squarish --- */
-    .mini-gallery-otv {
-      margin-top:3rem;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1.2rem;
-    }
-    .mini-image-otv { overflow:hidden;border-radius:20px;background:var(--card); }
-    .mini-image-otv img { width:100%;display:block;object-fit:contain;max-height:380px;transition:transform 1s ease; }
-    .mini-image-otv:hover img { transform:scale(1.05); }
-
-    /* ── ROTATION FIX ── */
-    .img-rotate-ccw {
-      transform:rotate(-90deg) scale(1.55);
-      transform-origin:center center;
-      width:100% !important;height:100% !important;
-      object-fit:cover;
-    }
+    .project-portrait-image:hover img { transform:scale(1.03); }
 
     /* ── CONTACT ── */
     .contact { padding:14rem 0;text-align:center;border-top:1px solid var(--line); }
@@ -163,6 +168,7 @@
       .project-portrait-image { max-width:340px;margin:auto; }
       .mini-gallery,.mini-gallery-otv { grid-template-columns:1fr; }
       .mini-gallery-3 { grid-template-columns:1fr 1fr; }
+      .mini-image-sq { height:340px; }
       .nav-links { gap:1.2rem; }
     }
   </style>
@@ -234,7 +240,7 @@
   <section class="projects" id="projects">
     <div class="container">
 
-      <!-- PROJECT 1 — OTV (landscape photos, wide layout) -->
+      <!-- PROJECT 1 — OTV -->
       <div class="project">
         <div class="project-image">
           <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/image%20of%20full%20OTV.jpg" alt="Autonomous Over Terrain Vehicle">
@@ -268,7 +274,6 @@
             </div>
           </div>
         </div>
-        <!-- OTV mini gallery: let images show naturally, no hard crop -->
         <div class="mini-gallery-otv">
           <div class="mini-image-otv">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Image%20of%20propulsion%20system.jpg" alt="Propulsion system">
@@ -279,9 +284,8 @@
         </div>
       </div>
 
-      <!-- PROJECT 2 — Battle Droid (tall vertical renders, portrait layout) -->
+      <!-- PROJECT 2 — Battle Droid (portrait layout) -->
       <div class="project">
-        <!-- Portrait layout: image left, text right -->
         <div class="project-portrait">
           <div class="project-portrait-image">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20standing.png" alt="Battle Droid Assembly — full standing view">
@@ -310,24 +314,27 @@
             </div>
           </div>
         </div>
-        <!-- 3-column mini gallery for vertical droid images -->
+        <!-- order: head | moving | torso 2 -->
         <div class="mini-gallery-3">
-          <div class="mini-image-sq">
-            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20moving.png" alt="Battle droid in motion">
-          </div>
           <div class="mini-image-sq">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20head.png" alt="Battle droid head detail">
           </div>
           <div class="mini-image-sq">
-            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20lower%20leg.png" alt="Battle droid lower leg">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20moving.png" alt="Battle droid in motion">
+          </div>
+          <div class="mini-image-sq">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20torso%202.png" alt="Battle droid torso component">
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 3 — Truss (landscape, wide layout) -->
+      <!-- PROJECT 3 — Truss -->
       <div class="project">
         <div class="project-image">
-          <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe Truss">
+          <!-- rotation wrapper keeps the transform stable on hover -->
+          <div class="rotate-wrap">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe Truss pre-testing">
+          </div>
         </div>
         <div class="project-content">
           <div>
@@ -362,7 +369,10 @@
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20post%20testing.JPEG" alt="Truss post testing">
           </div>
           <div class="mini-image">
-            <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Truss load graph">
+            <!-- rotation wrapper for graph too -->
+            <div class="rotate-wrap" style="height:100%;">
+              <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Truss load graph">
+            </div>
           </div>
         </div>
       </div>
