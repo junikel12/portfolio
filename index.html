@@ -8,9 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     :root {
       --bg: #050507;
@@ -23,250 +21,149 @@
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
 
     /* ── BACKGROUND ── */
-    .bg-orb {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(80px);
-      opacity: .45;
-    }
-    .bg-orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, #1a2fff22, transparent 70%);
-      top: -200px; right: -100px;
-    }
-    .bg-orb-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, #ff6a0011, transparent 70%);
-      bottom: 30vh; left: -150px;
-    }
+    .bg-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:0; filter:blur(80px); opacity:.45; }
+    .bg-orb-1 { width:600px;height:600px;background:radial-gradient(circle,#1a2fff22,transparent 70%);top:-200px;right:-100px; }
+    .bg-orb-2 { width:500px;height:500px;background:radial-gradient(circle,#ff6a0011,transparent 70%);bottom:30vh;left:-150px; }
 
     /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 1000;
-      backdrop-filter: blur(24px);
-      background: rgba(5,5,7,.65);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-container {
-      width: 90%; max-width: 1400px; margin: auto;
-      height: 68px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem; letter-spacing: .3px;
-    }
-    .nav-links { display: flex; gap: 2.2rem; }
-    .nav-links a {
-      color: var(--sub); text-decoration: none;
-      transition: color .25s; font-size: .9rem; font-weight: 500; letter-spacing: .3px;
-    }
-    .nav-links a:hover { color: var(--text); }
+    nav { position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(24px);background:rgba(5,5,7,.65);border-bottom:1px solid var(--line); }
+    .nav-container { width:90%;max-width:1400px;margin:auto;height:68px;display:flex;align-items:center;justify-content:space-between; }
+    .logo { font-family:'DM Serif Display',serif;font-size:1.15rem;letter-spacing:.3px; }
+    .nav-links { display:flex;gap:2.2rem; }
+    .nav-links a { color:var(--sub);text-decoration:none;transition:color .25s;font-size:.9rem;font-weight:500; }
+    .nav-links a:hover { color:var(--text); }
 
     /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 0 2rem;
-      position: relative; z-index: 1;
-    }
-    .hero-content { max-width: 1000px; }
+    .hero { min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 2rem;position:relative;z-index:1; }
+    .hero-content { max-width:1000px; }
+    .hero-eyebrow { display:inline-block;color:var(--accent);font-size:.8rem;letter-spacing:3px;text-transform:uppercase;border:1px solid rgba(168,197,255,.2);padding:.4rem 1rem;border-radius:999px;margin-bottom:2.5rem;animation:fadeUp .8s ease both; }
+    .hero h1 { font-family:'DM Serif Display',serif;font-size:clamp(4.5rem,11vw,9rem);line-height:.88;letter-spacing:-3px;margin-bottom:2.5rem;animation:fadeUp .8s .15s ease both; }
+    .hero h1 em { font-style:italic;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .hero p { color:var(--sub);font-size:1.2rem;line-height:1.85;max-width:680px;margin:auto;animation:fadeUp .8s .3s ease both; }
+    .hero-buttons { margin-top:3rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .45s ease both; }
 
-    .hero-eyebrow {
-      display: inline-block;
-      color: var(--accent); font-size: .8rem;
-      letter-spacing: 3px; text-transform: uppercase;
-      border: 1px solid rgba(168,197,255,.2);
-      padding: .4rem 1rem; border-radius: 999px;
-      margin-bottom: 2.5rem;
-      animation: fadeUp .8s ease both;
-    }
-
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(4.5rem, 11vw, 9rem);
-      line-height: .88;
-      letter-spacing: -3px;
-      margin-bottom: 2.5rem;
-      animation: fadeUp .8s .15s ease both;
-    }
-    .hero h1 em {
-      font-style: italic;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      color: var(--sub); font-size: 1.2rem; line-height: 1.85;
-      max-width: 680px; margin: auto;
-      animation: fadeUp .8s .3s ease both;
-    }
-
-    .hero-buttons {
-      margin-top: 3rem;
-      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
-      animation: fadeUp .8s .45s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
     /* ── BUTTONS ── */
-    .btn {
-      padding: .9rem 1.8rem; border-radius: 999px;
-      text-decoration: none; transition: all .25s;
-      font-weight: 500; font-size: .95rem;
-      border: 1px solid rgba(255,255,255,.08);
-      display: inline-block;
-    }
-    .btn-primary { background: var(--text); color: #050507; border-color: var(--text); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(168,197,255,.15); }
-    .btn-secondary { color: var(--text); background: rgba(255,255,255,.04); }
-    .btn-secondary:hover { background: rgba(255,255,255,.09); transform: translateY(-3px); }
+    .btn { padding:.9rem 1.8rem;border-radius:999px;text-decoration:none;transition:all .25s;font-weight:500;font-size:.95rem;border:1px solid rgba(255,255,255,.08);display:inline-block; }
+    .btn-primary { background:var(--text);color:#050507;border-color:var(--text); }
+    .btn-primary:hover { transform:translateY(-3px);box-shadow:0 12px 30px rgba(168,197,255,.15); }
+    .btn-secondary { color:var(--text);background:rgba(255,255,255,.04); }
+    .btn-secondary:hover { background:rgba(255,255,255,.09);transform:translateY(-3px); }
 
-    /* ── SECTIONS ── */
-    section { width: 100%; position: relative; z-index: 1; }
-    .container { width: 90%; max-width: 1400px; margin: auto; }
-
-    .section-label {
-      color: var(--accent); text-transform: uppercase;
-      letter-spacing: 3px; font-size: .75rem; font-weight: 500;
-      margin-bottom: 1.2rem;
-    }
+    /* ── GENERAL ── */
+    section { width:100%;position:relative;z-index:1; }
+    .container { width:90%;max-width:1400px;margin:auto; }
+    .section-label { color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-size:.75rem;font-weight:500;margin-bottom:1.2rem; }
 
     /* ── ABOUT ── */
-    .about { padding: 10rem 0; border-top: 1px solid var(--line); }
-    .about-grid {
-      display: grid; grid-template-columns: 1.3fr .7fr;
-      gap: 5rem; align-items: start;
-    }
-    .about h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.8rem, 5vw, 5.5rem);
-      line-height: .95; letter-spacing: -1px;
-    }
-    .about-text p {
-      color: var(--sub); line-height: 1.95; font-size: 1.05rem;
-      margin-bottom: 1.6rem;
-    }
-    .skills { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
-    .skill {
-      padding: .6rem 1.1rem; border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      color: var(--sub); font-size: .85rem;
-      transition: border-color .2s, color .2s;
-    }
-    .skill:hover { border-color: var(--accent); color: var(--accent); }
+    .about { padding:10rem 0;border-top:1px solid var(--line); }
+    .about-grid { display:grid;grid-template-columns:1.3fr .7fr;gap:5rem;align-items:start; }
+    .about h2 { font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5vw,5.5rem);line-height:.95;letter-spacing:-1px; }
+    .about-text p { color:var(--sub);line-height:1.95;font-size:1.05rem;margin-bottom:1.6rem; }
+    .skills { display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem; }
+    .skill { padding:.6rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--sub);font-size:.85rem;transition:border-color .2s,color .2s; }
+    .skill:hover { border-color:var(--accent);color:var(--accent); }
 
     /* ── PROJECTS ── */
-    .projects { padding: 4rem 0 12rem; }
-    .project { margin-bottom: 14rem; }
+    .projects { padding:4rem 0 12rem; }
+    .project { margin-bottom:14rem; }
 
+    /* --- WIDE LAYOUT (landscape hero image) --- */
     .project-image {
-      width: 100%; height: 78vh;
-      border-radius: 32px; overflow: hidden;
-      background: var(--card); margin-bottom: 2.5rem;
-      position: relative;
+      width:100%;height:78vh;
+      border-radius:32px;overflow:hidden;
+      background:var(--card);margin-bottom:2.5rem;
+      position:relative;
     }
-    .project-image::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,5,7,.4) 0%, transparent 50%);
-    }
-    .project-image img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1.8s ease;
-    }
-    .project:hover .project-image img { transform: scale(1.04); }
+    .project-image::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,7,.4) 0%,transparent 50%); }
+    .project-image img { width:100%;height:100%;object-fit:cover;transition:transform 1.8s ease; }
+    .project:hover .project-image img { transform:scale(1.04); }
 
-    .project-content {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
-    }
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      line-height: .92; letter-spacing: -1px;
-    }
-    .project-description {
-      color: var(--sub); line-height: 1.95; font-size: 1.05rem;
-    }
-    .project-tags { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
-    .tag {
-      padding: .55rem .95rem; border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      color: var(--sub); font-size: .82rem;
-    }
+    .project-content { display:grid;grid-template-columns:1fr 1fr;gap:5rem; }
+    .project-title { font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5vw,5rem);line-height:.92;letter-spacing:-1px; }
+    .project-description { color:var(--sub);line-height:1.95;font-size:1.05rem; }
+    .project-tags { display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem; }
+    .tag { padding:.55rem .95rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--sub);font-size:.82rem; }
 
-    /* ── MINI GALLERY ── */
-    .mini-gallery {
-      margin-top: 3rem;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
-    }
-    .mini-image {
-      height: 320px; overflow: hidden;
-      border-radius: 20px; background: var(--card);
-    }
-    .mini-image img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1s ease;
-    }
-    .mini-image:hover img { transform: scale(1.06); }
+    /* --- MINI GALLERY (landscape images, 2 wide) --- */
+    .mini-gallery { margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem; }
+    .mini-image { height:320px;overflow:hidden;border-radius:20px;background:var(--card); }
+    .mini-image img { width:100%;height:100%;object-fit:cover;transition:transform 1s ease; }
+    .mini-image:hover img { transform:scale(1.06); }
 
-    /* ── DIVIDER ── */
-    .project-divider {
-      width: 100%; height: 1px;
-      background: var(--line);
-      margin-bottom: 14rem;
+    /* --- PORTRAIT LAYOUT (tall/vertical hero) --- */
+    /* Used for Battle Droid — image sits beside the text, not above */
+    .project-portrait {
+      display:grid;
+      grid-template-columns:420px 1fr;
+      gap:5rem;
+      align-items:start;
+      margin-bottom:4rem;
+    }
+    .project-portrait-image {
+      border-radius:28px;overflow:hidden;
+      background:var(--card);
+      position:relative;
+      /* no fixed height — let the image define it */
+    }
+    .project-portrait-image img {
+      width:100%;display:block;
+      object-fit:contain;
+      transition:transform 1.8s ease;
+    }
+    .project-portrait:hover .project-portrait-image img { transform:scale(1.03); }
+
+    /* Mini gallery variant for portrait projects — 3 smaller squares */
+    .mini-gallery-3 {
+      margin-top:3rem;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.2rem;
+    }
+    .mini-image-sq { height:260px;overflow:hidden;border-radius:20px;background:var(--card); }
+    .mini-image-sq img { width:100%;height:100%;object-fit:contain;background:var(--card);transition:transform 1s ease; }
+    .mini-image-sq:hover img { transform:scale(1.06); }
+
+    /* --- OTV mini gallery — propulsion is tall, bracket is squarish --- */
+    .mini-gallery-otv {
+      margin-top:3rem;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.2rem;
+    }
+    .mini-image-otv { overflow:hidden;border-radius:20px;background:var(--card); }
+    .mini-image-otv img { width:100%;display:block;object-fit:contain;max-height:380px;transition:transform 1s ease; }
+    .mini-image-otv:hover img { transform:scale(1.05); }
+
+    /* ── ROTATION FIX ── */
+    .img-rotate-ccw {
+      transform:rotate(-90deg) scale(1.55);
+      transform-origin:center center;
+      width:100% !important;height:100% !important;
+      object-fit:cover;
     }
 
     /* ── CONTACT ── */
-    .contact {
-      padding: 14rem 0;
-      text-align: center;
-      border-top: 1px solid var(--line);
-    }
-    .contact h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3.5rem, 7vw, 7rem);
-      line-height: .9; letter-spacing: -2px;
-      margin-bottom: 2rem;
-    }
-    .contact p {
-      color: var(--sub); max-width: 600px;
-      margin: auto; line-height: 1.85; font-size: 1.1rem;
-    }
-    .contact-links {
-      margin-top: 3rem;
-      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
-    }
+    .contact { padding:14rem 0;text-align:center;border-top:1px solid var(--line); }
+    .contact h2 { font-family:'DM Serif Display',serif;font-size:clamp(3.5rem,7vw,7rem);line-height:.9;letter-spacing:-2px;margin-bottom:2rem; }
+    .contact p { color:var(--sub);max-width:600px;margin:auto;line-height:1.85;font-size:1.1rem; }
+    .contact-links { margin-top:3rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap; }
 
-    footer {
-      padding: 2rem; text-align: center;
-      color: #444; font-size: .85rem;
-      border-top: 1px solid var(--line);
-    }
+    footer { padding:2rem;text-align:center;color:#444;font-size:.85rem;border-top:1px solid var(--line); }
 
     /* ── MOBILE ── */
-    @media (max-width: 900px) {
-      .about-grid, .project-content { grid-template-columns: 1fr; gap: 2.5rem; }
-      .project-image { height: 52vh; }
-      .mini-gallery { grid-template-columns: 1fr; }
-      .nav-links { gap: 1.2rem; }
+    @media(max-width:900px) {
+      .about-grid,.project-content { grid-template-columns:1fr;gap:2.5rem; }
+      .project-image { height:52vh; }
+      .project-portrait { grid-template-columns:1fr; }
+      .project-portrait-image { max-width:340px;margin:auto; }
+      .mini-gallery,.mini-gallery-otv { grid-template-columns:1fr; }
+      .mini-gallery-3 { grid-template-columns:1fr 1fr; }
+      .nav-links { gap:1.2rem; }
     }
   </style>
 </head>
@@ -313,13 +210,8 @@
           <h2>Designing systems through engineering, research, and leadership.</h2>
         </div>
         <div class="about-text">
-          <p>
-            <!-- Fill in your introduction here -->
-            [Your introduction — who you are, where you go to school, what drives you as an engineer.]
-          </p>
-          <p>
-            [Your education, engineering interests, research experience, and future goals.]
-          </p>
+          <p>[Your introduction — who you are, where you go to school, what drives you as an engineer.]</p>
+          <p>[Your education, engineering interests, research experience, and future goals.]</p>
           <div class="skills">
             <div class="skill">SolidWorks</div>
             <div class="skill">Fusion 360</div>
@@ -342,7 +234,7 @@
   <section class="projects" id="projects">
     <div class="container">
 
-      <!-- PROJECT 1 — OTV -->
+      <!-- PROJECT 1 — OTV (landscape photos, wide layout) -->
       <div class="project">
         <div class="project-image">
           <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/image%20of%20full%20OTV.jpg" alt="Autonomous Over Terrain Vehicle">
@@ -376,28 +268,28 @@
             </div>
           </div>
         </div>
-        <div class="mini-gallery">
-          <div class="mini-image">
+        <!-- OTV mini gallery: let images show naturally, no hard crop -->
+        <div class="mini-gallery-otv">
+          <div class="mini-image-otv">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Image%20of%20propulsion%20system.jpg" alt="Propulsion system">
           </div>
-          <div class="mini-image">
+          <div class="mini-image-otv">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/bracket%20for%20motor.png" alt="Motor bracket">
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 2 — Battle Droid -->
+      <!-- PROJECT 2 — Battle Droid (tall vertical renders, portrait layout) -->
       <div class="project">
-        <div class="project-image">
-          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20standing.png" alt="Battle Droid Assembly">
-        </div>
-        <div class="project-content">
+        <!-- Portrait layout: image left, text right -->
+        <div class="project-portrait">
+          <div class="project-portrait-image">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20standing.png" alt="Battle Droid Assembly — full standing view">
+          </div>
           <div>
             <div class="section-label">Project 02</div>
             <h2 class="project-title">Full Battle Droid Assembly</h2>
-          </div>
-          <div>
-            <p class="project-description">
+            <p class="project-description" style="margin-top:1.5rem;">
               Developed a fully detailed Battle Droid Assembly in SolidWorks using reference images
               and mechanical assembly design. I created custom modeled geometry and joint systems
               using spline tools, advanced extrusions, and dimension refinement to replicate and
@@ -406,7 +298,7 @@
               emphasizing realism (especially the head), articulation, assembly integration, and
               detailed component interaction.
             </p>
-            <div class="project-tags">
+            <div class="project-tags" style="margin-top:2rem;">
               <div class="tag">SolidWorks</div>
               <div class="tag">Custom Geometry</div>
               <div class="tag">Assembly Modeling</div>
@@ -418,20 +310,24 @@
             </div>
           </div>
         </div>
-        <div class="mini-gallery">
-          <div class="mini-image">
+        <!-- 3-column mini gallery for vertical droid images -->
+        <div class="mini-gallery-3">
+          <div class="mini-image-sq">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20moving.png" alt="Battle droid in motion">
           </div>
-          <div class="mini-image">
+          <div class="mini-image-sq">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20head.png" alt="Battle droid head detail">
+          </div>
+          <div class="mini-image-sq">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20lower%20leg.png" alt="Battle droid lower leg">
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 3 — Truss -->
+      <!-- PROJECT 3 — Truss (landscape, wide layout) -->
       <div class="project">
         <div class="project-image">
-          <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe Truss">
+          <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe Truss">
         </div>
         <div class="project-content">
           <div>
@@ -466,7 +362,7 @@
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20post%20testing.JPEG" alt="Truss post testing">
           </div>
           <div class="mini-image">
-            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Truss load graph">
+            <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Truss load graph">
           </div>
         </div>
       </div>

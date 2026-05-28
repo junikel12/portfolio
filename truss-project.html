@@ -45,6 +45,15 @@
 
     .hero-image { width:100%; height:70vh; border-radius:32px; overflow:hidden; background:var(--card); margin:4rem 0; position:relative; z-index:1; }
     .hero-image img { width:100%; height:100%; object-fit:cover; }
+    /* Rotation fix for phone photos with EXIF orientation issues */
+    .img-rotate-ccw {
+      transform: rotate(-90deg) scale(1.55);
+      transform-origin: center center;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+    }
+    .rotate-ccw { transform: rotate(-90deg); transform-origin: center center; width: 100%; height: 100%; object-fit: cover; }
 
     .content-section { padding:5rem 0; position:relative; z-index:1; }
     .content-section + .content-section { border-top:1px solid var(--line); }
@@ -133,7 +142,7 @@
 
   <div class="container">
     <div class="hero-image">
-      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe truss pre-testing — all gusset plates and members assembled">
+      <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe truss pre-testing — all gusset plates and members assembled">
     </div>
   </div>
 
@@ -196,7 +205,7 @@
       </div>
 
       <div class="graph-wrap" style="margin-top:2rem;">
-        <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Load vs. displacement graph — truss failure at 515 lbs">
+        <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Load vs. displacement graph — truss failure at 515 lbs">
         <div class="graph-caption">
           Force (lbf) vs. displacement (in) recorded by the testing press. The truss reached a maximum load of 515 lbs before gusset plate shear initiated catastrophic failure.
         </div>
