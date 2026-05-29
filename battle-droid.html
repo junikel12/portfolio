@@ -85,18 +85,21 @@
     .body-text { color:var(--sub);line-height:1.95;font-size:1.05rem; }
     .body-text + .body-text { margin-top:1.2rem; }
 
-    /* ── ASSEMBLY PAIR — tall so full droid is visible ── */
+    /* ── ASSEMBLY PAIR — fixed height, image centered both axes ── */
     .assembly-pair { display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:3rem; }
     .assembly-img {
       border-radius:20px; overflow:hidden;
       background:var(--card);
       border:1px solid var(--glow-border);
       box-shadow:var(--glow-shadow);
+      height:680px;
+      display:flex; align-items:center; justify-content:center;
     }
     .assembly-img img {
-      width:100%; display:block;
+      max-width:100%; max-height:100%;
+      width:auto; height:auto;
       object-fit:contain;
-      /* no fixed height — let the full droid show */
+      display:block;
     }
 
     /* ── PARTS GRID — 3 col, uniform height ── */
