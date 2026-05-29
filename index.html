@@ -78,6 +78,8 @@
       border-radius:32px; overflow:hidden;
       background:var(--card); margin-bottom:2.5rem;
       position:relative;
+      border:1px solid rgba(168,197,255,.1);
+      box-shadow: 0 0 0 1px rgba(168,197,255,.08), 0 0 40px 8px rgba(168,197,255,.13);
     }
     .project-image::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,7,.4) 0%,transparent 50%); }
     /* Normal (non-rotated) images get the zoom hover on the img itself */
@@ -112,23 +114,25 @@
 
     /* Standard 2-col landscape mini gallery */
     .mini-gallery { margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem; }
-    .mini-image { height:320px;overflow:hidden;border-radius:20px;background:var(--card); }
+    .mini-image { height:320px;overflow:hidden;border-radius:20px;background:var(--card);border:1px solid rgba(168,197,255,.1);box-shadow:0 0 24px 4px rgba(168,197,255,.1); }
     .mini-image img { width:100%;height:100%;object-fit:cover;transition:transform 1s ease; }
     .mini-image:hover img { transform:scale(1.06); }
 
     /* OTV 2-col — images show full height naturally */
     .mini-gallery-otv { margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem; }
-    .mini-image-otv { overflow:hidden;border-radius:20px;background:var(--card); }
+    .mini-image-otv { overflow:hidden;border-radius:20px;background:var(--card);border:1px solid rgba(168,197,255,.1);box-shadow:0 0 24px 4px rgba(168,197,255,.1); }
     .mini-image-otv img { width:100%;display:block;object-fit:contain;max-height:420px;transition:transform 1s ease; }
     .mini-image-otv:hover img { transform:scale(1.05); }
 
     /* Battle Droid 3-col — tall cells, contain so full droid shows */
     .mini-gallery-3 { margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem; }
     .mini-image-sq {
-      height:480px; /* taller so vertical renders have room */
+      height:480px;
       overflow:hidden;
-      border-radius:20px; /* rounded corners to match main images */
+      border-radius:20px;
       background:var(--card);
+      border:1px solid rgba(168,197,255,.1);
+      box-shadow:0 0 24px 4px rgba(168,197,255,.1);
     }
     .mini-image-sq img { width:100%;height:100%;object-fit:contain;background:var(--card);transition:transform 1s ease; }
     .mini-image-sq:hover img { transform:scale(1.06); }
@@ -144,6 +148,8 @@
     .project-portrait-image {
       border-radius:28px; overflow:hidden;
       background:var(--card);
+      border:1px solid rgba(168,197,255,.1);
+      box-shadow:0 0 40px 8px rgba(168,197,255,.13);
     }
     .project-portrait-image img {
       width:100%; display:block;

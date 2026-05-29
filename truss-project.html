@@ -43,7 +43,7 @@
     .tags { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
     .tag { padding:.55rem .95rem; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); color:var(--sub); font-size:.82rem; }
 
-    .hero-image { width:100%; height:70vh; border-radius:32px; overflow:hidden; background:var(--card); margin:4rem 0; position:relative; z-index:1; }
+    .hero-image { width:100%; min-height:50vh; border-radius:32px; overflow:hidden; background:var(--card); margin:4rem 0; position:relative; z-index:1; }
     .hero-image img { width:100%; height:100%; object-fit:cover; }
     /* Rotation fix for phone photos with EXIF orientation issues */
     .img-rotate-ccw {
@@ -73,7 +73,7 @@
 
     /* BEFORE / AFTER */
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:2.5rem; }
-    .img-card { border-radius:20px; overflow:hidden; background:var(--card); border:1px solid var(--line); }
+    .img-card { border-radius:20px; overflow:hidden; background:var(--card); border:1px solid rgba(168,197,255,.12); box-shadow:0 0 24px 4px rgba(168,197,255,.1); }
     .img-card img { width:100%; height:340px; object-fit:cover; display:block; }
     .img-caption { padding:1rem 1.3rem; color:var(--sub); font-size:.88rem; line-height:1.6; }
     .img-caption strong { color:var(--text); }
@@ -141,8 +141,11 @@
   </div>
 
   <div class="container">
-    <div class="hero-image">
-      <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe truss pre-testing — all gusset plates and members assembled">
+    <!-- Full truss shown — no crop, rotated via wrapper -->
+    <div style="margin:4rem 0;border-radius:32px;overflow:hidden;background:var(--card);border:1px solid rgba(168,197,255,.12);box-shadow:0 0 0 1px rgba(168,197,255,.08),0 0 40px 8px rgba(168,197,255,.13);">
+      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG"
+           alt="Howe truss pre-testing — all gusset plates and members assembled"
+           style="width:100%;display:block;object-fit:contain;transform:rotate(-90deg);transform-origin:center;max-height:none;">
     </div>
   </div>
 
@@ -204,8 +207,10 @@
         </div>
       </div>
 
-      <div class="graph-wrap" style="margin-top:2rem;">
-        <img class="img-rotate-ccw" src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Load vs. displacement graph — truss failure at 515 lbs">
+      <div style="margin-top:2rem;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid rgba(168,197,255,.12);box-shadow:0 0 24px 4px rgba(168,197,255,.1);">
+        <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png"
+             alt="Load vs. displacement graph — truss failure at 515 lbs"
+             style="width:100%;display:block;object-fit:contain;transform:rotate(-90deg);transform-origin:center;max-height:none;">
         <div class="graph-caption">
           Force (lbf) vs. displacement (in) recorded by the testing press. The truss reached a maximum load of 515 lbs before gusset plate shear initiated catastrophic failure.
         </div>
