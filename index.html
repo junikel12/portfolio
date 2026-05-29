@@ -89,19 +89,14 @@
     }
     .project-image:hover img { transform:scale(1.04); }
 
-    /* Rotated images need their own wrapper so hover doesn't fight the rotation */
-    .rotate-wrap {
+    /* Rotated images — use background-image so no <img> hover transform can interfere */
+    .bg-rotated {
       width:100%; height:100%;
-      overflow:hidden;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .rotate-wrap img {
-      /* rotate then scale up enough to fill the container without black bars */
-      transform: rotate(-90deg) scaleX(1.78) scaleY(1.0);
-      width:100%; height:100%;
-      object-fit:cover;
-      flex-shrink:0;
-      transition: none; /* no hover transform — keeps rotation stable */
+      background-size: cover;
+      background-position: center;
+      /* rotate the container itself so the image appears correct-side-up */
+      transform: rotate(-90deg) scale(1.78);
+      transform-origin: center center;
     }
 
     .project-content { display:grid;grid-template-columns:1fr 1fr;gap:5rem; }
@@ -337,10 +332,7 @@
       <!-- PROJECT 3 — Truss -->
       <div class="project">
         <div class="project-image">
-          <!-- rotation wrapper keeps the transform stable on hover -->
-          <div class="rotate-wrap">
-            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG" alt="Howe Truss pre-testing">
-          </div>
+          <div class="bg-rotated" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG');"></div>
         </div>
         <div class="project-content">
           <div>
@@ -375,10 +367,7 @@
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20post%20testing.JPEG" alt="Truss post testing">
           </div>
           <div class="mini-image">
-            <!-- rotation wrapper for graph too -->
-            <div class="rotate-wrap" style="height:100%;">
-              <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png" alt="Truss load graph">
-            </div>
+            <div class="bg-rotated" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png');height:100%;"></div>
           </div>
         </div>
       </div>
