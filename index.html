@@ -89,14 +89,30 @@
     }
     .project-image:hover img { transform:scale(1.04); }
 
-    /* Rotated images — use background-image so no <img> hover transform can interfere */
-    .bg-rotated {
+    /* Rotated images — inner div is square so background-size:contain fills after 90deg rotation */
+    .bg-rotated-outer {
       width:100%; height:100%;
-      background-size: cover;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .bg-rotated {
+      /* square so width==height: after rotating 90deg, the image fills the long axis */
+      width:78vh; height:78vh;
+      background-repeat: no-repeat;
       background-position: center;
-      /* rotate the container itself so the image appears correct-side-up */
-      transform: rotate(-90deg) scale(1.78);
+      background-size: contain;
+      transform: rotate(-90deg);
       transform-origin: center center;
+      flex-shrink: 0;
+    }
+    .mini-bg-rotated {
+      width:320px; height:320px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+      flex-shrink: 0;
     }
 
     .project-content { display:grid;grid-template-columns:1fr 1fr;gap:5rem; }
@@ -332,7 +348,9 @@
       <!-- PROJECT 3 — Truss -->
       <div class="project">
         <div class="project-image">
-          <div class="bg-rotated" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG');"></div>
+          <div class="bg-rotated-outer">
+            <div class="bg-rotated" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG');"></div>
+          </div>
         </div>
         <div class="project-content">
           <div>
@@ -366,8 +384,8 @@
           <div class="mini-image">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20post%20testing.JPEG" alt="Truss post testing">
           </div>
-          <div class="mini-image">
-            <div class="bg-rotated" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png');height:100%;"></div>
+          <div class="mini-image" style="display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <div class="mini-bg-rotated" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/truss%20graph.png');"></div>
           </div>
         </div>
       </div>
