@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Projects | Jordan Unikel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#050507; --card:#0d0d12; --text:#f0f0f5;
+      --sub:#8888a0; --accent:#a8c5ff; --line:rgba(255,255,255,.06);
+      --glow-border:rgba(168,197,255,.1);
+      --glow-shadow:0 0 0 1px rgba(168,197,255,.07), 0 0 28px 4px rgba(168,197,255,.1);
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    .bg-orb { position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);opacity:.3; }
+    .bg-orb-1 { width:500px;height:500px;background:radial-gradient(circle,#1a2fff18,transparent 70%);top:-150px;right:-100px; }
+
+    nav { position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(24px);background:rgba(5,5,7,.65);border-bottom:1px solid var(--line); }
+    .nav-container { width:90%;max-width:1400px;margin:auto;height:68px;display:flex;align-items:center;justify-content:space-between; }
+    .logo { font-family:'DM Serif Display',serif;font-size:1.15rem;text-decoration:none;color:var(--text); }
+    .nav-links { display:flex;gap:2rem; }
+    .nav-links a { color:var(--sub);text-decoration:none;transition:color .25s;font-size:.9rem;font-weight:500; }
+    .nav-links a:hover { color:var(--text); }
+
+    .container { width:90%;max-width:1200px;margin:auto; }
+
+    /* PAGE HEADER */
+    .page-header { padding:14rem 0 5rem;position:relative;z-index:1; }
+    .back-link { display:inline-flex;align-items:center;gap:.5rem;color:var(--sub);text-decoration:none;font-size:.9rem;margin-bottom:3rem;transition:color .2s; }
+    .back-link:hover { color:var(--text); }
+    .page-header h1 { font-family:'DM Serif Display',serif;font-size:clamp(3rem,7vw,6rem);line-height:.9;letter-spacing:-2px;margin-bottom:1.5rem; }
+    .page-header p { color:var(--sub);font-size:1.05rem;line-height:1.8;max-width:580px; }
+
+    /* SECTION DIVIDER */
+    .archive-section { padding:3rem 0 6rem;position:relative;z-index:1; }
+    .archive-section + .archive-section { border-top:1px solid var(--line); }
+    .archive-label {
+      color:var(--accent);text-transform:uppercase;letter-spacing:3px;
+      font-size:.75rem;font-weight:500;margin-bottom:2.5rem;
+      display:flex;align-items:center;gap:1rem;
+    }
+    .archive-label::after { content:'';flex:1;height:1px;background:var(--line); }
+
+    /* PROJECT CARDS GRID */
+    .projects-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+      gap:1.5rem;
+    }
+
+    .project-card {
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      text-decoration:none;
+      color:var(--text);
+      transition:border-color .3s, box-shadow .3s, transform .3s;
+      display:flex;flex-direction:column;
+    }
+    .project-card:hover {
+      border-color:var(--glow-border);
+      box-shadow:var(--glow-shadow);
+      transform:translateY(-4px);
+    }
+    .card-image {
+      width:100%;height:220px;overflow:hidden;background:#0a0a10;
+      flex-shrink:0;
+    }
+    .card-image img {
+      width:100%;height:100%;object-fit:contain;
+      transition:transform .8s ease;
+    }
+    .project-card:hover .card-image img { transform:scale(1.04); }
+
+    /* rotated image inside card */
+    .card-image .bg-rotated-card {
+      width:220px;height:100%;
+      margin:0 auto;
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:contain;
+      transform:rotate(-90deg);
+      transform-origin:center;
+    }
+
+    .card-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
+    .card-number { color:var(--accent);font-size:.72rem;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:.6rem; }
+    .card-title { font-family:'DM Serif Display',serif;font-size:1.5rem;line-height:1.1;margin-bottom:.9rem; }
+    .card-desc { color:var(--sub);font-size:.9rem;line-height:1.75;flex:1; }
+    .card-tags { display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem; }
+    .card-tag { padding:.35rem .75rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--sub);font-size:.78rem; }
+    .card-arrow { margin-top:1.5rem;color:var(--accent);font-size:.9rem;font-weight:500; }
+
+    footer { padding:2rem;text-align:center;color:#444;font-size:.85rem;border-top:1px solid var(--line);position:relative;z-index:1; }
+
+    @media(max-width:700px) {
+      .projects-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jordan Unikel</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <h1>All Projects</h1>
+      <p>Every project I've worked on — featured and archived. Updated as new work gets added.</p>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="archive-section">
+    <div class="container">
+      <div class="archive-label">Featured</div>
+      <div class="projects-grid">
+
+        <a href="otv-project.html" class="project-card">
+          <div class="card-image">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/image%20of%20full%20OTV.jpg" alt="OTV">
+          </div>
+          <div class="card-body">
+            <div class="card-number">Project 01</div>
+            <div class="card-title">Autonomous Over Terrain Vehicle</div>
+            <div class="card-desc">Drivetrain design, motor selection, and custom 3D-printed brackets for a fully autonomous obstacle-course vehicle.</div>
+            <div class="card-tags">
+              <span class="card-tag">SolidWorks</span>
+              <span class="card-tag">Drivetrain</span>
+              <span class="card-tag">3D Printing</span>
+            </div>
+            <div class="card-arrow">View Project →</div>
+          </div>
+        </a>
+
+        <a href="battle-droid.html" class="project-card">
+          <div class="card-image">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/battle%20droid%20standing.png" alt="Battle Droid">
+          </div>
+          <div class="card-body">
+            <div class="card-number">Project 02</div>
+            <div class="card-title">Full Battle Droid Assembly</div>
+            <div class="card-desc">Complete B-1 Battle Droid modeled in SolidWorks with 15+ features, spline geometry, and full mechanical mates.</div>
+            <div class="card-tags">
+              <span class="card-tag">SolidWorks</span>
+              <span class="card-tag">Assembly</span>
+              <span class="card-tag">Splines</span>
+            </div>
+            <div class="card-arrow">View Project →</div>
+          </div>
+        </a>
+
+        <a href="truss-project.html" class="project-card">
+          <div class="card-image" style="display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <div class="bg-rotated-card" style="background-image:url('https://raw.githubusercontent.com/junikel12/portfolio/main/Truss%20pre%20testing.JPEG');width:360px;height:220px;background-size:contain;background-repeat:no-repeat;background-position:center;transform:rotate(-90deg);flex-shrink:0;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-number">Project 03</div>
+            <div class="card-title">Howe Truss Optimization</div>
+            <div class="card-desc">Weight-to-force ratio optimization via Howe truss design, custom laser-cut gusset plates, and member force analysis. Failed at 515 lbs.</div>
+            <div class="card-tags">
+              <span class="card-tag">SolidWorks</span>
+              <span class="card-tag">Structural Analysis</span>
+              <span class="card-tag">FEA</span>
+            </div>
+            <div class="card-arrow">View Project →</div>
+          </div>
+        </a>
+
+        <a href="phone-stand.html" class="project-card">
+          <div class="card-image">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/phone%20stand%20image.png" alt="Phone Stand">
+          </div>
+          <div class="card-body">
+            <div class="card-number">Project 04</div>
+            <div class="card-title">Lightweight Phone Stand</div>
+            <div class="card-desc">Weight-optimized phone stand designed to hold a phone vertically and horizontally under a 20g mass constraint. Final mass: 19.38g.</div>
+            <div class="card-tags">
+              <span class="card-tag">SolidWorks</span>
+              <span class="card-tag">FEA</span>
+              <span class="card-tag">3D Printing</span>
+            </div>
+            <div class="card-arrow">View Project →</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHIVED — empty for now, ready to fill -->
+  <div class="archive-section">
+    <div class="container">
+      <div class="archive-label">Archived</div>
+      <p style="color:var(--sub);font-size:.95rem;">
+        Older projects will appear here as the featured section is updated.
+      </p>
+    </div>
+  </div>
+
+  <footer>© 2026 Jordan Unikel</footer>
+</body>
+</html>
