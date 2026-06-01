@@ -89,15 +89,20 @@
     }
     .project-image:hover img { transform:scale(1.04); }
 
-    /* Rotated images — inner div is square so background-size:contain fills after 90deg rotation */
+    /* Rotated images — use a wide square so after 90deg rotation the image fills the container */
     .bg-rotated-outer {
       width:100%; height:100%;
       display:flex; align-items:center; justify-content:center;
       overflow:hidden;
     }
+    /* The photo is landscape. The container is ~90vw wide and 78vh tall.
+       After rotating 90deg, the div's width becomes its visual height and vice versa.
+       So we set width = container height (78vh) and height = container width (90vw).
+       Then background-size:contain fills the full landscape image edge to edge on the long axis. */
     .bg-rotated {
-      /* square so width==height: after rotating 90deg, the image fills the long axis */
-      width:78vh; height:78vh;
+      width: 78vh;
+      height: 90vw;
+      max-height: 90vw;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -105,8 +110,10 @@
       transform-origin: center center;
       flex-shrink: 0;
     }
+    /* Mini graph in 320px tall container — same logic: width=320px, height=container width */
     .mini-bg-rotated {
-      width:320px; height:320px;
+      width: 320px;
+      height: 45vw;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
