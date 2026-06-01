@@ -32,9 +32,43 @@
     nav { position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(24px);background:rgba(5,5,7,.65);border-bottom:1px solid var(--line); }
     .nav-container { width:90%;max-width:1400px;margin:auto;height:68px;display:flex;align-items:center;justify-content:space-between; }
     .logo { font-family:'DM Serif Display',serif;font-size:1.15rem;letter-spacing:.3px; }
-    .nav-links { display:flex;gap:2.2rem; }
+    .nav-links { display:flex;gap:2.2rem;align-items:center; }
     .nav-links a { color:var(--sub);text-decoration:none;transition:color .25s;font-size:.9rem;font-weight:500; }
     .nav-links a:hover { color:var(--text); }
+
+    /* Dropdown */
+    .nav-dropdown { position:relative; display:flex; align-items:center; }
+    .nav-dropdown-toggle {
+      color:var(--sub);font-size:.9rem;font-weight:500;
+      background:none;border:none;cursor:pointer;
+      display:flex;align-items:center;gap:.35rem;
+      padding:0; font-family:'DM Sans',sans-serif;
+      transition:color .25s;
+    }
+    .nav-dropdown-toggle:hover { color:var(--text); }
+    .nav-dropdown-toggle svg { width:10px;height:10px;transition:transform .25s; }
+    .nav-dropdown.open .nav-dropdown-toggle svg { transform:rotate(180deg); }
+
+    .dropdown-menu {
+      display:none;
+      position:absolute;top:calc(100% + 16px);left:50%;
+      transform:translateX(-50%);
+      background:rgba(13,13,18,.96);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:.6rem;
+      min-width:230px;
+      box-shadow:0 16px 48px rgba(0,0,0,.5);
+    }
+    .nav-dropdown.open .dropdown-menu { display:block; }
+    .dropdown-menu a {
+      display:block;padding:.65rem 1rem;border-radius:8px;
+      color:var(--sub);text-decoration:none;font-size:.875rem;
+      transition:background .2s,color .2s;white-space:nowrap;
+    }
+    .dropdown-menu a:hover { background:rgba(255,255,255,.06);color:var(--text); }
+    .dropdown-divider { height:1px;background:var(--line);margin:.4rem .5rem; }
 
     /* ── HERO ── */
     .hero { min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 2rem;position:relative;z-index:1; }
@@ -155,7 +189,8 @@
     .mini-image-sq img { width:100%;height:100%;object-fit:contain;background:var(--card);transition:transform 1s ease; }
     .mini-image-sq:hover img { transform:scale(1.06); }
 
-    /* ── PORTRAIT LAYOUT — Battle Droid main image beside text ── */
+    /* Phone stand drawing mini image needs contain not cover */
+    .mini-image-contain img { object-fit:contain !important; }
     .project-portrait {
       display:grid;
       grid-template-columns:420px 1fr;
@@ -208,7 +243,22 @@
       <div class="logo">Jordan Unikel</div>
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <div class="nav-dropdown" id="projectsDropdown">
+          <button class="nav-dropdown-toggle" onclick="toggleDropdown()">
+            Projects
+            <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="all-projects.html">All Projects</a>
+            <div class="dropdown-divider"></div>
+            <a href="otv-project.html">01 — Autonomous OTV</a>
+            <a href="battle-droid.html">02 — Battle Droid Assembly</a>
+            <a href="truss-project.html">03 — Howe Truss</a>
+            <a href="phone-stand.html">04 — Lightweight Phone Stand</a>
+          </div>
+        </div>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -218,14 +268,14 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-eyebrow">Engineering Portfolio</div>
-      <h1>Engineering<br><em>Beyond Theory</em></h1>
+      <h1>Built, Not<br><em>Just Designed</em></h1>
       <p>
         Engineering student focused on mechanical design, systems engineering,
         and fabrication — turning calculations and CAD into real-world solutions.
       </p>
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#" class="btn btn-secondary">Resume</a>
+        <a href="all-projects.html" class="btn btn-primary">View Projects</a>
+        <a href="resume.html" class="btn btn-secondary">Resume</a>
         <a href="https://www.linkedin.com/in/jordan-unikel/" target="_blank" class="btn btn-secondary">LinkedIn</a>
       </div>
     </div>
@@ -431,7 +481,7 @@
           <div class="mini-image">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/phone%20stand%20von%20mises%20FEA.png" alt="Von Mises FEA">
           </div>
-          <div class="mini-image">
+          <div class="mini-image mini-image-contain">
             <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/phone%20stand%20drawing.png" alt="Engineering drawing">
           </div>
         </div>
@@ -457,13 +507,42 @@
         and hands-on technical innovation. Always open to new opportunities.
       </p>
       <div class="contact-links">
-        <a href="https://github.com/junikel12/portfolio/blob/main/resume.pdf" target="_blank" class="btn btn-primary">Resume</a>
+        <a href="resume.html" class="btn btn-primary">Resume</a>
         <a href="https://www.linkedin.com/in/jordan-unikel/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+      </div>
+      <!-- Contact details -->
+      <div style="margin-top:2.5rem;display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;">
+        <a href="tel:[YOUR-PHONE]" style="display:flex;align-items:center;gap:.6rem;color:var(--sub);text-decoration:none;font-size:.95rem;transition:color .2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--sub)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.55-.55a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.92z"/>
+          </svg>
+          [Your Phone Number]
+        </a>
+        <a href="mailto:[YOUR-EMAIL]" style="display:flex;align-items:center;gap:.6rem;color:var(--sub);text-decoration:none;font-size:.95rem;transition:color .2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--sub)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          [Your Email]
+        </a>
       </div>
     </div>
   </section>
 
   <footer>© 2026 Jordan Unikel</footer>
+
+  <script>
+    function toggleDropdown() {
+      document.getElementById('projectsDropdown').classList.toggle('open');
+    }
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const dropdown = document.getElementById('projectsDropdown');
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+  </script>
 
 </body>
 </html>
