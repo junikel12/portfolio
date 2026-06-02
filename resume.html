@@ -12,7 +12,7 @@
       --bg:#050507; --text:#f0f0f5; --sub:#8888a0;
       --accent:#a8c5ff; --line:rgba(255,255,255,.06);
     }
-    html, body { height:100%; font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow:hidden; }
+    html, body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); }
 
     nav {
       position:fixed; top:0; width:100%; z-index:1000;
@@ -28,18 +28,12 @@
     .nav-links a { color:var(--sub); text-decoration:none; transition:color .25s; font-size:.9rem; font-weight:500; }
     .nav-links a:hover { color:var(--text); }
 
-    .page-body {
-      padding-top:68px;
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
     /* toolbar */
     .toolbar {
+      position:fixed; top:68px; left:0; width:100%; z-index:999;
       display:flex; align-items:center; justify-content:space-between;
       padding:.8rem 5%; background:rgba(13,13,18,.95);
-      border-bottom:1px solid var(--line); flex-shrink:0; gap:1rem; flex-wrap:wrap;
+      border-bottom:1px solid var(--line); gap:1rem; flex-wrap:wrap;
     }
     .back-link {
       display:inline-flex; align-items:center; gap:.4rem;
@@ -54,16 +48,35 @@
       background:var(--text); color:#050507;
       text-decoration:none; font-weight:500; font-size:.85rem;
       transition:transform .2s, box-shadow .2s; flex-shrink:0;
+      border:none; cursor:pointer; font-family:'DM Sans',sans-serif;
     }
     .btn-download:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(168,197,255,.2); }
 
-    /* The iframe fills all remaining height */
-    .viewer {
-      flex:1;
+    /* Resume image container */
+    .resume-container {
+      margin-top:116px; /* nav (68) + toolbar (~48) */
+      padding:3rem 0 5rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .resume-img-wrap {
       width:100%;
-      border:none;
-      background:#fff;
+      max-width:860px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 0 0 1px rgba(168,197,255,.1), 0 32px 80px rgba(0,0,0,.6);
+    }
+    .resume-img-wrap img {
+      width:100%;
       display:block;
+    }
+
+    .download-row {
+      margin-top:2rem;
+      display:flex;
+      justify-content:center;
     }
   </style>
 </head>
@@ -80,18 +93,34 @@
     </div>
   </nav>
 
-  <div class="page-body">
+  <div class="toolbar">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="index.html" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </a>
+      <span class="toolbar-title">Jordan Unikel — Resume</span>
+    </div>
+    <a href="https://raw.githubusercontent.com/junikel12/portfolio/main/resume.pdf"
+       download="Jordan_Unikel_Resume.pdf"
+       class="btn-download">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download PDF
+    </a>
+  </div>
 
-    <div class="toolbar">
-      <div style="display:flex;align-items:center;gap:1rem;">
-        <a href="index.html" class="back-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          Back
-        </a>
-        <span class="toolbar-title">Jordan Unikel — Resume</span>
-      </div>
+  <div class="resume-container">
+    <div class="resume-img-wrap">
+      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/resume.png"
+           alt="Jordan Unikel Resume">
+    </div>
+    <div class="download-row">
       <a href="https://raw.githubusercontent.com/junikel12/portfolio/main/resume.pdf"
          download="Jordan_Unikel_Resume.pdf"
          class="btn-download">
@@ -103,19 +132,6 @@
         Download PDF
       </a>
     </div>
-
-    <!--
-      Google Docs viewer — renders any publicly accessible PDF as a clean image
-      in the browser. No account needed, no forced download.
-      The PDF URL must be publicly accessible (your GitHub raw link works once
-      the repo is public).
-    -->
-    <iframe
-      class="viewer"
-      src="https://docs.google.com/viewer?embedded=true&url=https://raw.githubusercontent.com/junikel12/portfolio/main/resume.pdf"
-      title="Jordan Unikel Resume">
-    </iframe>
-
   </div>
 
 </body>
