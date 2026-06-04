@@ -80,6 +80,7 @@
     .hero-buttons { margin-top:3rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .45s ease both; }
 
     @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
     /* ── BUTTONS ── */
     .btn { padding:.9rem 1.8rem;border-radius:999px;text-decoration:none;transition:all .25s;font-weight:500;font-size:.95rem;border:1px solid rgba(255,255,255,.08);display:inline-block; }
@@ -268,7 +269,7 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-eyebrow">Engineering Portfolio</div>
-      <h1>Built, Not<br><em>Just Designed</em></h1>
+      <h1>Concepts<br><em>Brought to Life</em></h1>
       <p>
         Mechanical engineering student interested in mechanical systems design, simulation, and
         fabrication. Excited about discovering more of what it means to be an engineer.
@@ -278,6 +279,13 @@
         <a href="resume.html" class="btn btn-secondary">Resume</a>
         <a href="https://www.linkedin.com/in/jordan-unikel/" target="_blank" class="btn btn-secondary">LinkedIn</a>
       </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div style="position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fadeUp .8s .8s ease both;">
+      <span style="color:var(--sub);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;">Scroll</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sub)" stroke-width="1.5" stroke-linecap="round" style="animation:bounce 1.8s infinite;">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
     </div>
   </section>
 
@@ -290,8 +298,7 @@
           <h2>Designing systems through engineering, research, and leadership.</h2>
         </div>
         <div class="about-text">
-          <p>Mechanical engineering student at the University of Maryland, focused on developing creative solutions to real-world problems and discovering what engineering can do in practice.</p>
-          <p>I am a sophomore at the University of Maryland and an active member of the Terrapin Rocket Team, NEIT Lab, and the Engineering Senate. Through the Terrapin Rocket Team I have developed hands-on experience with CAD, FEA, and both additive and subtractive manufacturing, including 3D printing, lathing, and CNC milling. I also conduct thermal fluids research at the NEIT Lab. Through my involvement across these organizations and the engineering school I was elected as an undergraduate engineering senator, a role I am using to make a positive impact on the students and organizations within the Clark School.</p>
+          <p>I am a sophomore Mechanical Engineering student at the University of Maryland and an active member of the Terrapin Rocket Team, NEIT Lab, and the Engineering Senate. Through the Terrapin Rocket Team I have developed hands-on experience with CAD, FEA, and both additive and subtractive manufacturing, including 3D printing, lathing, and CNC milling. I also conduct thermal fluids research at the NEIT Lab. Through my involvement across these organizations and the engineering school I was elected as an undergraduate engineering senator, a role I am using to make a positive impact on the students and organizations within the Clark School.</p>
           <div class="skills">
             <div class="skill">SolidWorks</div>
             <div class="skill">Fusion 360</div>
@@ -487,6 +494,12 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- ALL PROJECTS LINK -->
+    <div style="text-align:center;padding:2rem 0 8rem;position:relative;z-index:1;">
+      <p style="color:var(--sub);margin-bottom:1.5rem;font-size:1rem;">Looking for more?</p>
+      <a href="all-projects.html" class="btn btn-secondary" style="font-size:1rem;padding:1rem 2.2rem;">View All Projects →</a>
     </div>
 
   </section>
