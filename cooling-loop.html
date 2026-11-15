@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cold Plate Cooling Test Loop | Jordan Unikel</title>
+  <meta name="description" content="Design of an experimental cold plate cooling test loop for evaluating gyroidal cold plates — component selection, layout optimization, and a 200+ component SolidWorks assembly.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050507'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23a8c5ff'%3EJU%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#050507; --card:#0d0d12; --text:#f0f0f5;
+      --sub:#8888a0; --accent:#a8c5ff; --accent2:#ffd6a8; --line:rgba(255,255,255,.06);
+      --glow-border:rgba(168,197,255,.12);
+      --glow-shadow:0 0 0 1px rgba(168,197,255,.08), 0 0 36px 6px rgba(168,197,255,.13);
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    .bg-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:0; filter:blur(80px); opacity:.4; }
+    .bg-orb-1 { width:600px;height:600px;background:radial-gradient(circle,#00b4ff1c,transparent 70%);top:-200px;right:-100px; }
+
+    nav { position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(24px);background:rgba(5,5,7,.65);border-bottom:1px solid var(--line); }
+    .nav-container { width:90%;max-width:1400px;margin:auto;height:68px;display:flex;align-items:center;justify-content:space-between; }
+    .logo { font-family:'DM Serif Display',serif;font-size:1.15rem;text-decoration:none;color:var(--text); }
+    .nav-links { display:flex;gap:2rem; }
+    .nav-links a { color:var(--sub);text-decoration:none;transition:color .25s;font-size:.9rem;font-weight:500; }
+    .nav-links a:hover { color:var(--text); }
+    /* ── NAV DROPDOWN (shared across all pages) ── */
+    .nav-links { align-items:center; }
+    .nav-dropdown { position:relative; display:flex; align-items:center; }
+    .nav-dropdown-toggle {
+      color:var(--sub); font-size:.9rem; font-weight:500;
+      background:none; border:none; cursor:pointer;
+      display:flex; align-items:center; gap:.35rem;
+      padding:0; font-family:'DM Sans',sans-serif; transition:color .25s;
+    }
+    .nav-dropdown-toggle:hover, .nav-dropdown.open .nav-dropdown-toggle { color:var(--text); }
+    .nav-dropdown-toggle svg { width:10px; height:10px; transition:transform .25s; }
+    .nav-dropdown.open .nav-dropdown-toggle svg { transform:rotate(180deg); }
+    .dropdown-menu {
+      display:none; position:absolute; top:calc(100% + 16px); left:50%;
+      transform:translateX(-50%);
+      background:rgba(13,13,18,.97); backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.08); border-radius:14px;
+      padding:.6rem; min-width:250px; z-index:100;
+      box-shadow:0 16px 48px rgba(0,0,0,.5);
+    }
+    .nav-dropdown.open .dropdown-menu { display:block; }
+    .nav-links .dropdown-menu a {
+      display:block; padding:.65rem 1rem; border-radius:8px;
+      color:var(--sub); text-decoration:none; font-size:.875rem;
+      transition:background .2s, color .2s; white-space:nowrap;
+    }
+    .nav-links .dropdown-menu a:hover { background:rgba(255,255,255,.06); color:var(--text); }
+    .dropdown-divider { height:1px; background:rgba(255,255,255,.06); margin:.4rem .5rem; }
+    .dropdown-label { padding:.45rem 1rem .2rem; color:#5a5a70; font-size:.68rem; letter-spacing:2px; text-transform:uppercase; }
+    @media(max-width:600px) {
+      .nav-links { gap:1.1rem; }
+      .logo { font-size:1rem; }
+      .dropdown-menu { left:auto; right:-4.5rem; transform:none; }
+    }
+
+    .container { width:90%;max-width:1200px;margin:auto; }
+
+    /* HERO */
+    .project-hero { padding:14rem 0 6rem;position:relative;z-index:1; }
+    .back-link { display:inline-flex;align-items:center;gap:.5rem;color:var(--sub);text-decoration:none;font-size:.9rem;margin-bottom:3rem;transition:color .2s; }
+    .back-link:hover { color:var(--text); }
+    .project-label { color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-size:.75rem;font-weight:500;margin-bottom:1.2rem; }
+    .project-hero h1 { font-family:'DM Serif Display',serif;font-size:clamp(3.5rem,8vw,7rem);line-height:.9;letter-spacing:-2px;margin-bottom:1.6rem; }
+    .project-meta { color:var(--accent2);font-size:.9rem;letter-spacing:.3px;margin-bottom:2.2rem; }
+    .project-hero p { color:var(--sub);font-size:1.1rem;line-height:1.9;max-width:760px;margin-bottom:2rem; }
+    .tags { display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem; }
+    .tag { padding:.55rem .95rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--sub);font-size:.82rem; }
+
+    /* RENDER CARDS — CAD renders shown whole on a dark frame, click to zoom */
+    .render-card {
+      background:var(--card); border:1px solid var(--glow-border); box-shadow:var(--glow-shadow);
+      border-radius:28px; overflow:hidden; position:relative; z-index:1;
+      cursor:zoom-in;
+    }
+    .render-card .render-frame { padding:2rem; display:flex; align-items:center; justify-content:center; }
+    .render-card img { display:block; max-width:100%; height:auto; border-radius:16px; transition:transform 1.2s ease; }
+    .render-card:hover img { transform:scale(1.015); }
+    .render-card.hero { margin:4rem 0; }
+    .render-card.hero img { max-height:72vh; }
+    .zoom-hint {
+      position:absolute; bottom:1.1rem; right:1.3rem;
+      background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
+      color:rgba(255,255,255,.75); font-size:.76rem;
+      padding:.4rem .8rem; border-radius:999px; pointer-events:none;
+    }
+    .img-caption { padding:0 1.6rem 1.4rem; color:var(--sub); font-size:.88rem; line-height:1.65; }
+    .img-caption strong { color:var(--text); font-weight:500; }
+
+    /* SECTIONS */
+    .content-section { padding:5rem 0;position:relative;z-index:1; }
+    .content-section + .content-section { border-top:1px solid var(--line); }
+    .section-heading { font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.5px;margin-bottom:1.5rem; }
+    .body-text { color:var(--sub);line-height:1.95;font-size:1.05rem;max-width:860px; }
+    .body-text + .body-text { margin-top:1.2rem; }
+
+    /* STAT BAR */
+    .stat-bar { display:flex;gap:2rem;flex-wrap:wrap;margin:2.5rem 0 0;padding:2rem;background:var(--card);border:1px solid var(--glow-border);border-radius:20px; }
+    .stat { flex:1;min-width:150px; }
+    .stat-num { font-family:'DM Serif Display',serif;font-size:2.8rem;color:var(--accent2);line-height:1.1; }
+    .stat-label { color:var(--sub);font-size:.85rem;margin-top:.4rem;letter-spacing:.5px;line-height:1.5; }
+
+    /* TWO COL */
+    .two-col { display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.5rem;align-items:start; }
+    .two-col .render-card { border-radius:20px; }
+    .two-col .render-card .render-frame { padding:1.2rem; }
+    .two-col .render-card img { border-radius:12px; }
+
+    /* PROCESS CARDS */
+    .process-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:2.5rem; }
+    .process-card {
+      background:var(--card); border:1px solid var(--line); border-radius:20px;
+      padding:1.8rem 1.9rem; transition:border-color .3s;
+    }
+    .process-card:hover { border-color:rgba(168,197,255,.2); }
+    .process-num { color:var(--accent);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.8rem; }
+    .process-title { font-family:'DM Serif Display',serif;font-size:1.45rem;margin-bottom:.7rem; }
+    .process-desc { color:var(--sub);font-size:.95rem;line-height:1.8; }
+    .process-desc ul { margin:.6rem 0 0 1.1rem; }
+    .process-desc li { margin-bottom:.3rem; }
+
+    /* NOTE / CALLOUT */
+    .callout {
+      margin-top:2.5rem; padding:1.6rem 1.9rem; border-radius:20px;
+      background:linear-gradient(135deg,rgba(168,197,255,.06),rgba(255,214,168,.04));
+      border:1px solid var(--glow-border);
+      color:var(--sub); line-height:1.85; font-size:.98rem;
+    }
+    .callout strong { color:var(--text); font-weight:500; }
+
+    /* REPORT / BOM LINK */
+    .report-block {
+      margin-top:3rem; padding:2rem 2.5rem;
+      background:var(--card); border:1px solid var(--line);
+      border-radius:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
+    }
+    .report-text .label { color:var(--accent); font-size:.75rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:.4rem; }
+    .report-text .title { font-family:'DM Serif Display',serif; font-size:1.4rem; }
+    .btn { padding:.9rem 1.8rem; border-radius:999px; text-decoration:none; transition:all .25s; font-weight:500; font-size:.95rem; border:1px solid rgba(255,255,255,.08); display:inline-block; }
+    .btn-primary { background:var(--text); color:#050507; border-color:var(--text); }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(168,197,255,.15); }
+
+    /* LIGHTBOX */
+    .lightbox { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;cursor:zoom-out; }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:94vw;max-height:92vh;object-fit:contain;border-radius:12px; }
+    .lightbox-close { position:absolute;top:1.5rem;right:1.5rem;color:rgba(255,255,255,.6);font-size:2rem;cursor:pointer;line-height:1;background:none;border:none; }
+
+    footer { padding:2rem;text-align:center;color:#444;font-size:.85rem;border-top:1px solid var(--line);position:relative;z-index:1; }
+
+    @media(max-width:768px) {
+      .two-col, .process-grid { grid-template-columns:1fr; }
+      .render-card .render-frame { padding:1rem; }
+      .report-block { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <img id="lightbox-img" src="" alt="Full view">
+  </div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jordan Unikel</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <div class="nav-dropdown" id="projectsDropdown">
+          <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+            Projects
+            <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="all-projects.html">All Projects</a>
+            <div class="dropdown-divider"></div>
+            <a href="cooling-loop.html">01 — Cold Plate Cooling Loop</a>
+            <a href="adjustable-stand.html">02 — Adjustable Pipe Stand</a>
+            <a href="otv-project.html">03 — Autonomous OTV</a>
+            <a href="battle-droid.html">04 — Battle Droid Assembly</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">Archive</div>
+            <a href="truss-project.html">Howe Truss</a>
+            <a href="phone-stand.html">Lightweight Phone Stand</a>
+          </div>
+        </div>
+        <a href="resume.html">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-hero">
+    <div class="container">
+      <a href="index.html#projects" class="back-link">← Back to Projects</a>
+      <div class="project-label">Project 01</div>
+      <h1>Cold Plate<br>Cooling Test Loop</h1>
+      <div class="project-meta">Laboratory for Advanced Thermal and Fluid Systems · Villanova University · Summer 2026</div>
+      <p>
+        An experimental liquid cooling test loop designed to measure how gyroidal cold plates
+        improve heat dispersion and how they affect pressure across the system. I owned the design
+        end to end: component selection, benchtop layout, the full SolidWorks assembly, and the
+        procurement Bill of Materials.
+      </p>
+      <div class="tags">
+        <div class="tag">SolidWorks</div>
+        <div class="tag">Large Assembly Modeling</div>
+        <div class="tag">3D Sketch Sweeps</div>
+        <div class="tag">Thermal-Fluids</div>
+        <div class="tag">Component Selection</div>
+        <div class="tag">Bill of Materials</div>
+        <div class="tag">Research</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="render-card hero" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/front%20overhead%20view.png">
+      <div class="render-frame">
+        <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/front%20overhead%20view.png" alt="Cold plate cooling test loop — front overhead SolidWorks render of the full benchtop system">
+      </div>
+      <div class="zoom-hint">Click to enlarge</div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Project Overview</h2>
+      <p class="body-text">
+        The goal of this project was to design an experimental cold plate cooling test loop to see
+        how gyroidal cold plates would improve heat dispersion and affect pressure in a liquid
+        cooling system. The loop had to fit within the benchtop area the lab provided while still
+        letting the cold plates be tested under controlled, repeatable conditions.
+      </p>
+      <p class="body-text">
+        I picked out the components based on the project's requirements, including the pumps and
+        the types of tubing, then optimized where every component sat on the bench. Finally, I
+        modeled the entire system in SolidWorks and put together a Bill of Materials with costs,
+        purchase links, and a justification for each part.
+      </p>
+
+      <div class="stat-bar">
+        <div class="stat">
+          <div class="stat-num">200+</div>
+          <div class="stat-label">components in the SolidWorks assembly</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Gyroid</div>
+          <div class="stat-label">cold plate geometry under test</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">layout objectives — tube length, bends, gravity</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">BOM</div>
+          <div class="stat-label">costs, links &amp; justifications for every part</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM VIEWS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">System Views</h2>
+      <p class="body-text">
+        The same loop from the back, showing how the tubing is routed between the benchtop test
+        section and the equipment on the lower shelves and floor.
+      </p>
+      <div class="two-col">
+        <div class="render-card" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/back%20overhead%20view.png">
+          <div class="render-frame">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/back%20overhead%20view.png" alt="Cooling loop — back overhead render" loading="lazy">
+          </div>
+          <div class="img-caption"><strong>Back overhead view.</strong> Shows how tubing is routed from the top of the frame, down through the shelves, and out to the units on either side of the bench.</div>
+        </div>
+        <div class="render-card" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/Back%20view.png">
+          <div class="render-frame">
+            <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Back%20view.png" alt="Cooling loop — straight-on back view render" loading="lazy">
+          </div>
+          <div class="img-caption"><strong>Back view.</strong> A straight-on view of how components are stacked vertically to keep runs short within the bench footprint.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Design Process</h2>
+      <p class="body-text">
+        Every placement decision in the loop traded off against pressure loss and pump performance,
+        so the layout was treated as part of the engineering problem rather than an afterthought.
+      </p>
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-num">01</div>
+          <div class="process-title">Component Selection</div>
+          <p class="process-desc">
+            Selected pumps, tubing types, and the rest of the loop hardware against the
+            requirements of the experiment, so the loop could deliver the flow conditions
+            needed to compare cold plate designs.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-num">02</div>
+          <div class="process-title">Layout Optimization</div>
+          <div class="process-desc">
+            Positioned every component within the provided benchtop area to:
+            <ul>
+              <li>Minimize total tube length</li>
+              <li>Minimize the number of bends in the tubing</li>
+              <li>Use gravity to help the pump and maximize its efficiency</li>
+            </ul>
+          </div>
+        </div>
+        <div class="process-card">
+          <div class="process-num">03</div>
+          <div class="process-title">Full-System CAD</div>
+          <p class="process-desc">
+            Built the complete loop as a single SolidWorks assembly of more than 200 components.
+            Tubing was modeled by sweeping profiles along 3D sketch paths routed through the
+            system, so the model reflects real tube runs and bend locations.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-num">04</div>
+          <div class="process-title">Procurement BOM</div>
+          <p class="process-desc">
+            Produced a Bill of Materials listing every part with its cost, a purchase link,
+            and a written justification for why it was chosen, ready for the lab to order from.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>My role:</strong> this project covers the design phase, which I owned from
+        requirements through the final assembly and BOM.
+      </div>
+
+      <!--
+        OPTIONAL: link to the BOM or a write-up. Paste the link into href and delete these comment markers.
+      <div class="report-block">
+        <div class="report-text">
+          <div class="label">Documentation</div>
+          <div class="title">Bill of Materials</div>
+        </div>
+        <a href="PASTE-LINK-HERE" target="_blank" rel="noopener" class="btn btn-primary">View the BOM →</a>
+      </div>
+      -->
+    </div>
+  </div>
+
+  <footer>© 2026 Jordan Unikel</footer>
+
+  <script>
+    /* Lightbox: any element with data-zoom opens that image full screen */
+    (function () {
+      var lb = document.getElementById('lightbox'), img = document.getElementById('lightbox-img');
+      document.querySelectorAll('[data-zoom]').forEach(function (el) {
+        el.addEventListener('click', function () { img.src = el.getAttribute('data-zoom'); lb.classList.add('open'); });
+      });
+      lb.addEventListener('click', function () { lb.classList.remove('open'); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
+    })();
+  </script>
+  <script>
+    /* Projects dropdown: click to open, click outside or Esc to close */
+    (function () {
+      var d = document.getElementById('projectsDropdown');
+      if (!d) return;
+      var b = d.querySelector('.nav-dropdown-toggle');
+      function set(open) { d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); }
+      b.addEventListener('click', function (e) { e.stopPropagation(); set(!d.classList.contains('open')); });
+      document.addEventListener('click', function (e) { if (!d.contains(e.target)) set(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    })();
+  </script>
+</body>
+</html>

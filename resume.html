@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume | Jordan Unikel</title>
+  <meta name="description" content="Resume of Jordan Unikel, mechanical engineering student at the University of Maryland.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050507'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23a8c5ff'%3EJU%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -27,6 +29,40 @@
     .nav-links { display:flex; gap:2rem; align-items:center; }
     .nav-links a { color:var(--sub); text-decoration:none; transition:color .25s; font-size:.9rem; font-weight:500; }
     .nav-links a:hover { color:var(--text); }
+    /* ── NAV DROPDOWN (shared across all pages) ── */
+    .nav-links { align-items:center; }
+    .nav-dropdown { position:relative; display:flex; align-items:center; }
+    .nav-dropdown-toggle {
+      color:var(--sub); font-size:.9rem; font-weight:500;
+      background:none; border:none; cursor:pointer;
+      display:flex; align-items:center; gap:.35rem;
+      padding:0; font-family:'DM Sans',sans-serif; transition:color .25s;
+    }
+    .nav-dropdown-toggle:hover, .nav-dropdown.open .nav-dropdown-toggle { color:var(--text); }
+    .nav-dropdown-toggle svg { width:10px; height:10px; transition:transform .25s; }
+    .nav-dropdown.open .nav-dropdown-toggle svg { transform:rotate(180deg); }
+    .dropdown-menu {
+      display:none; position:absolute; top:calc(100% + 16px); left:50%;
+      transform:translateX(-50%);
+      background:rgba(13,13,18,.97); backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.08); border-radius:14px;
+      padding:.6rem; min-width:250px; z-index:100;
+      box-shadow:0 16px 48px rgba(0,0,0,.5);
+    }
+    .nav-dropdown.open .dropdown-menu { display:block; }
+    .nav-links .dropdown-menu a {
+      display:block; padding:.65rem 1rem; border-radius:8px;
+      color:var(--sub); text-decoration:none; font-size:.875rem;
+      transition:background .2s, color .2s; white-space:nowrap;
+    }
+    .nav-links .dropdown-menu a:hover { background:rgba(255,255,255,.06); color:var(--text); }
+    .dropdown-divider { height:1px; background:rgba(255,255,255,.06); margin:.4rem .5rem; }
+    .dropdown-label { padding:.45rem 1rem .2rem; color:#5a5a70; font-size:.68rem; letter-spacing:2px; text-transform:uppercase; }
+    @media(max-width:600px) {
+      .nav-links { gap:1.1rem; }
+      .logo { font-size:1rem; }
+      .dropdown-menu { left:auto; right:-4.5rem; transform:none; }
+    }
 
     /* toolbar */
     .toolbar {
@@ -87,7 +123,24 @@
       <a href="index.html" class="logo">Jordan Unikel</a>
       <div class="nav-links">
         <a href="index.html#about">About</a>
-        <a href="all-projects.html">Projects</a>
+        <div class="nav-dropdown" id="projectsDropdown">
+          <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+            Projects
+            <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="all-projects.html">All Projects</a>
+            <div class="dropdown-divider"></div>
+            <a href="cooling-loop.html">01 — Cold Plate Cooling Loop</a>
+            <a href="adjustable-stand.html">02 — Adjustable Pipe Stand</a>
+            <a href="otv-project.html">03 — Autonomous OTV</a>
+            <a href="battle-droid.html">04 — Battle Droid Assembly</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">Archive</div>
+            <a href="truss-project.html">Howe Truss</a>
+            <a href="phone-stand.html">Lightweight Phone Stand</a>
+          </div>
+        </div>
         <a href="resume.html">Resume</a>
       </div>
     </div>
@@ -117,8 +170,8 @@
 
   <div class="resume-container">
     <div class="resume-img-wrap">
-      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Screenshot_2026-09-14_140109.png"
-           alt="Jordan Unikel Resume">
+      <img src="https://raw.githubusercontent.com/junikel12/portfolio/main/Resume%20november%202026.png"
+           alt="Jordan Unikel Resume — November 2026">
     </div>
     <div class="download-row">
       <a href="https://raw.githubusercontent.com/junikel12/portfolio/main/resume.pdf"
@@ -134,5 +187,17 @@
     </div>
   </div>
 
+  <script>
+    /* Projects dropdown: click to open, click outside or Esc to close */
+    (function () {
+      var d = document.getElementById('projectsDropdown');
+      if (!d) return;
+      var b = d.querySelector('.nav-dropdown-toggle');
+      function set(open) { d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); }
+      b.addEventListener('click', function (e) { e.stopPropagation(); set(!d.classList.contains('open')); });
+      document.addEventListener('click', function (e) { if (!d.contains(e.target)) set(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    })();
+  </script>
 </body>
 </html>
