@@ -61,12 +61,23 @@
     }
     .nav-links .dropdown-menu a:hover { background:rgba(255,255,255,.06); color:var(--text); }
     .dropdown-divider { height:1px; background:rgba(255,255,255,.06); margin:.4rem .5rem; }
-    .dropdown-label { padding:.45rem 1rem .2rem; color:#5a5a70; font-size:.68rem; letter-spacing:2px; text-transform:uppercase; }
     @media(max-width:600px) {
       .nav-links { gap:1.1rem; }
       .logo { font-size:1rem; }
       .dropdown-menu { left:auto; right:-4.5rem; transform:none; }
     }
+
+    /* ── BOTTOM BACK LINK (project pages) ── */
+    .bottom-nav { padding:3.5rem 0 4.5rem; text-align:center; border-top:1px solid var(--line); position:relative; z-index:1; }
+    .bottom-nav a {
+      display:inline-block; padding:.9rem 1.8rem; border-radius:999px;
+      color:var(--text); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+      text-decoration:none; font-weight:500; font-size:.95rem; transition:all .25s;
+    }
+    .bottom-nav a:hover { background:rgba(255,255,255,.09); transform:translateY(-3px); }
+
+    /* Sections/figures that stay hidden until their image file exists on GitHub */
+    .pending:not(.ready) { display:none; }
 
     .container { width:90%; max-width:1200px; margin:auto; }
 
@@ -182,9 +193,7 @@
             <a href="otv-project.html">03 — Autonomous OTV</a>
             <a href="battle-droid.html">04 — Battle Droid Assembly</a>
             <div class="dropdown-divider"></div>
-            <div class="dropdown-label">Archive</div>
-            <a href="truss-project.html">Howe Truss</a>
-            <a href="phone-stand.html">Lightweight Phone Stand</a>
+            <a href="all-projects.html#archive">Archive</a>
           </div>
         </div>
         <a href="resume.html">Resume</a>
@@ -313,6 +322,12 @@
         </div>
 
       </div>
+    </div>
+  </div>
+
+    <div class="bottom-nav">
+    <div class="container">
+      <a href="index.html#projects">← Back to Projects</a>
     </div>
   </div>
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adjustable Pipe Stand | Jordan Unikel</title>
-  <meta name="description" content="Design and iteration of a 3D printed, one-hand adjustable snap-fit stand for suspending 0.25–1 inch piping on a lab benchtop.">
+  <meta name="description" content="Ten iterations of a 3D printed, one-hand adjustable pipe stand for 0.25–1 inch piping, designed in SolidWorks, printed in PLA, and shared with every PhD student and postdoc in the lab.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050507'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23a8c5ff'%3EJU%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -56,12 +56,23 @@
     }
     .nav-links .dropdown-menu a:hover { background:rgba(255,255,255,.06); color:var(--text); }
     .dropdown-divider { height:1px; background:rgba(255,255,255,.06); margin:.4rem .5rem; }
-    .dropdown-label { padding:.45rem 1rem .2rem; color:#5a5a70; font-size:.68rem; letter-spacing:2px; text-transform:uppercase; }
     @media(max-width:600px) {
       .nav-links { gap:1.1rem; }
       .logo { font-size:1rem; }
       .dropdown-menu { left:auto; right:-4.5rem; transform:none; }
     }
+
+    /* ── BOTTOM BACK LINK (project pages) ── */
+    .bottom-nav { padding:3.5rem 0 4.5rem; text-align:center; border-top:1px solid var(--line); position:relative; z-index:1; }
+    .bottom-nav a {
+      display:inline-block; padding:.9rem 1.8rem; border-radius:999px;
+      color:var(--text); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+      text-decoration:none; font-weight:500; font-size:.95rem; transition:all .25s;
+    }
+    .bottom-nav a:hover { background:rgba(255,255,255,.09); transform:translateY(-3px); }
+
+    /* Sections/figures that stay hidden until their image file exists on GitHub */
+    .pending:not(.ready) { display:none; }
 
     .container { width:90%;max-width:1200px;margin:auto; }
 
@@ -129,6 +140,22 @@
     }
     .change-list strong { color:var(--text); font-weight:500; display:block; margin-bottom:.15rem; }
 
+    /* WHY ITERATIONS — numbered steps */
+    .steps { list-style:none; counter-reset:step; display:grid; gap:1.1rem; margin-top:2.5rem; }
+    .steps li {
+      counter-increment:step; position:relative;
+      background:var(--card); border:1px solid var(--line); border-radius:20px;
+      padding:1.6rem 1.8rem 1.6rem 5.2rem; color:var(--sub); line-height:1.85; font-size:.98rem;
+    }
+    .steps li::before {
+      content:counter(step, decimal-leading-zero); position:absolute; left:1.8rem; top:1.45rem;
+      font-family:'DM Serif Display',serif; font-size:1.7rem; color:var(--accent2);
+    }
+    .steps strong { display:block; color:var(--text); font-family:'DM Serif Display',serif; font-weight:400; font-size:1.3rem; margin-bottom:.35rem; }
+    .cad-card .cad-frame { background:#fff; padding:1.2rem; }
+    .cad-card .cad-frame img { height:auto; max-height:70vh; width:100%; object-fit:contain; }
+    @media(max-width:600px) { .steps li { padding:1.4rem 1.3rem 1.4rem 1.3rem; } .steps li::before { position:static; display:block; margin-bottom:.4rem; } }
+
     /* LIGHTBOX */
     .lightbox { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;cursor:zoom-out; }
     .lightbox.open { display:flex; }
@@ -174,9 +201,7 @@
             <a href="otv-project.html">03 — Autonomous OTV</a>
             <a href="battle-droid.html">04 — Battle Droid Assembly</a>
             <div class="dropdown-divider"></div>
-            <div class="dropdown-label">Archive</div>
-            <a href="truss-project.html">Howe Truss</a>
-            <a href="phone-stand.html">Lightweight Phone Stand</a>
+            <a href="all-projects.html#archive">Archive</a>
           </div>
         </div>
         <a href="resume.html">Resume</a>
@@ -192,12 +217,15 @@
       <div class="project-meta">Laboratory for Advanced Thermal and Fluid Systems · Villanova University · Summer 2026</div>
       <p>
         A custom 3D printed stand that suspends 0.25–1 inch diameter piping at adjustable heights
-        and drops straight into the benchtop's 1 inch hole grid. I designed and iterated through
-        three height-adjustment mechanisms and many slider revisions to land on a stand that is
-        easy to adjust with one hand and holds up over time.
+        and drops straight into the benchtop's 1 inch hole grid. It was made for every loop in the
+        lab, prints in a couple of hours, and is shared on the lab's public drive. I went through
+        10 iterations across three height-adjustment mechanisms to land on a stand that adjusts
+        with one hand and holds up over time.
       </p>
       <div class="tags">
+        <div class="tag">SolidWorks</div>
         <div class="tag">3D Printing</div>
+        <div class="tag">PLA</div>
         <div class="tag">Snap-Fit Design</div>
         <div class="tag">Design Iteration</div>
         <div class="tag">Prototyping</div>
@@ -231,24 +259,48 @@
         of stand iterations, each one aimed at improving overall print quality, how easily the
         stand could be adjusted with one hand, and how well it would hold up over time.
       </p>
+      <p class="body-text">
+        The stand was made for all of the loops in the lab, including the cold plate loop. I
+        designed it to be 3D printable and cut the print time down to a couple of hours from
+        export to taking it off the print plate, so a new stand is a same-day or overnight job
+        when one is needed. The design is on a public drive for all of the PhD students and
+        postdocs working in the lab.
+      </p>
       <div class="stat-bar">
+        <div class="stat">
+          <div class="stat-num">10</div>
+          <div class="stat-label">design iterations</div>
+        </div>
         <div class="stat">
           <div class="stat-num">0.25–1″</div>
           <div class="stat-label">pipe diameter range supported</div>
         </div>
         <div class="stat">
-          <div class="stat-num">1″</div>
-          <div class="stat-label">benchtop hole spacing the base mounts to</div>
+          <div class="stat-num">Same-day</div>
+          <div class="stat-label">print turnaround — a couple of hours per print</div>
         </div>
         <div class="stat">
-          <div class="stat-num">3</div>
-          <div class="stat-label">height-adjustment mechanisms tested</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">1-Hand</div>
-          <div class="stat-label">adjustment as a design requirement</div>
+          <div class="stat-num">PLA</div>
+          <div class="stat-label">the right balance of flex and stiffness</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- WHY 10 ITERATIONS -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Why 10 Iterations</h2>
+      <p class="body-text">
+        Each iteration came from something that failed or fell short when the part was actually
+        printed and used, which is why the design changed mechanism partway through.
+      </p>
+      <ol class="steps">
+        <li><strong>Started with a rack and pin</strong>The first version adjusted height with a rack and pin system.</li>
+        <li><strong>Tested push-down sliders</strong>I printed a couple of push-downs at various lengths to test fit with ridges, hoping the slider would act like a spring as it was pushed down. It didn't work well in real life. They were also a pain to get back out once pushed in, so reusing them would have been a hassle.</li>
+        <li><strong>Switched to a pinch slider</strong>Squeezing to adjust is still doable with one hand, and it let me make the ridges deeper, which made the overall platform stronger. The pinch slider is also the easiest to make move in both directions, and it let the stand hold a greater weight before failing.</li>
+        <li><strong>Checked the structure</strong>The side walls needed a slit that went all the way through, and I was concerned that would hurt structural integrity. It turned out to be fine, and adding fillets where the columns meet the plate at the bottom of the stand reduced potential bending even further.</li>
+      </ol>
     </div>
   </div>
 
@@ -264,11 +316,11 @@
       <div class="three-col">
         <div class="photo-card" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/rack%20and%20pin%20iteration.jpeg">
           <div class="photo"><img src="https://raw.githubusercontent.com/junikel12/portfolio/main/rack%20and%20pin%20iteration.jpeg" alt="Rack and pin version of the stand" loading="lazy"></div>
-          <div class="img-caption"><div class="card-name">Rack &amp; Pin</div>Height set by pins locating in discrete positions along the frame.</div>
+          <div class="img-caption"><div class="card-name">Rack &amp; Pin</div>The first version of the stand.</div>
         </div>
         <div class="photo-card" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/full%20%20stand%20pushdown%20edition.jpeg">
           <div class="photo"><img src="https://raw.githubusercontent.com/junikel12/portfolio/main/full%20%20stand%20pushdown%20edition.jpeg" alt="Full stand with the one-way push slider" loading="lazy"></div>
-          <div class="img-caption"><div class="card-name">One-Way Push Slider</div>The full stand fitted with the one-way push-down slider.</div>
+          <div class="img-caption"><div class="card-name">One-Way Push Slider</div>The full stand with the one-way push-down slider, which is hard to pull back out once pushed in.</div>
         </div>
         <div class="photo-card" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/slider%20pushdown%20edition.jpeg">
           <div class="photo zoom-part"><img src="https://raw.githubusercontent.com/junikel12/portfolio/main/slider%20pushdown%20edition.jpeg" alt="One-way push-down slider piece on its own" loading="lazy"></div>
@@ -337,6 +389,29 @@
         <div class="photo wide"><img src="https://raw.githubusercontent.com/junikel12/portfolio/main/snap%20fit%20slits%20closeup.jpeg" alt="Close-up of the snap-fit slits in the stand frame" loading="lazy"></div>
         <div class="img-caption"><strong>Snap-fit slits, close up.</strong> The ledges and grooves that hold the slider in position.</div>
       </div>
+    </div>
+  </div>
+
+    <!-- MATERIAL & CAD -->
+  <div class="content-section">
+    <div class="container">
+      <h2 class="section-heading">Material &amp; CAD</h2>
+      <p class="body-text">
+        The stand is printed in PLA, which had the right balance of springiness and bend-to-stiffness
+        ratio to prevent warping over time. I modeled it in SolidWorks and built it up as a CAD
+        assembly.
+      </p>
+      <!-- stays hidden until pipe-stand-cad-assembly.png is uploaded to GitHub -->
+      <div class="photo-card cad-card pending" data-zoom="https://raw.githubusercontent.com/junikel12/portfolio/main/pipe-stand-cad-assembly.png" style="margin-top:2.5rem;">
+        <div class="photo wide cad-frame"><img src="https://raw.githubusercontent.com/junikel12/portfolio/main/pipe-stand-cad-assembly.png" alt="SolidWorks CAD assembly of the adjustable pipe stand" onload="this.closest('.pending').classList.add('ready')"></div>
+        <div class="img-caption"><strong>CAD assembly.</strong> The stand modeled in SolidWorks.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="container">
+      <a href="index.html#projects">← Back to Projects</a>
     </div>
   </div>
 
